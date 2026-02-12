@@ -1,21 +1,7 @@
-async function loadComponent(id, file) {
-    const container = document.getElementById(id);
-    if (container) {
-        const html = await fetch(file).then(r => r.text());
-        container.innerHTML = html;
-    }
-}
+/* Modernity — Hybrid React-Style Layout
+   Smooth fade-in transition
+*/
 
-window.onload = async () => {
-    const prefix = window.componentPathPrefix || "";
-    const headerFile = window.headerFile || (prefix + "components/header.html");
-
-    await loadComponent("header", headerFile);
-    await loadComponent("footer", prefix + "components/footer.html");
-    await loadComponent("transition", prefix + "components/transition.html");
-
-    setTimeout(() => {
-        const t = document.getElementById("transition");
-        if (t) t.classList.add("fade-out");
-    }, 50);
-};
+window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+});

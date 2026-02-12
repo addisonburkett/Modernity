@@ -86,16 +86,62 @@ body.loaded {
 }
 
 .nav a {
+    position: relative;
     color: var(--fg);
     text-decoration: none;
-    padding: var(--space-1) var(--space-2);
-    border-radius: 8px;
-    transition: 0.2s;
+    padding: 10px 18px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: color 0.25s ease;
+}
+
+/* Glassy background on hover */
+.nav a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Neon underline animation */
+.nav a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.25s ease, left 0.25s ease;
+}
+
+/* Hover effects */
+.nav a:hover::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.nav a:hover::after {
+    width: 80%;
+    left: 10%;
 }
 
 .nav a:hover {
-    background: var(--glass);
-    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.nav a.active {
+    color: var(--accent);
+}
+
+.nav a.active::after {
+    width: 80%;
+    left: 10%;
 }
 
 /* ------------------------------
@@ -139,6 +185,32 @@ body.loaded {
 .widget:hover {
     transform: translateY(-5px);
     border-color: var(--accent);
+}
+
+/* ------------------------------
+   Responsive Layout Margins
+------------------------------ */
+
+/* Mobile (default) */
+.container {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+    .container {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        padding-left: 124px;
+        padding-right: 124px;
+    }
 }
 
 /* ------------------------------

@@ -3,39 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <title>Discussions — Modernity</title>
-    <script>
-        window.componentPathPrefix = "";
-        window.headerFile = "components/header.html";
-    </script>
+
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="assets/js/main.js" defer></script>
+
+    <style>
+        /* Collapsible Tab System */
+        .tab-group {
+            margin-bottom: var(--space-4);
+        }
+
+        .tab-button {
+            width: 100%;
+            text-align: left;
+            padding: var(--space-2);
+            border-radius: 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.25s;
+        }
+
+        .tab-button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .tab-content {
+            margin-top: var(--space-2);
+            display: none;
+            padding: var(--space-3);
+            border-radius: 16px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+        }
+
+        .tab-content.open {
+            display: block;
+        }
+
+        .sub-item {
+            display: block;
+            padding: var(--space-2);
+            margin-bottom: var(--space-2);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            text-decoration: none;
+            color: var(--fg);
+            transition: 0.25s;
+        }
+
+        .sub-item:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("discussions-tab-btn");
+            const content = document.getElementById("discussions-tab-content");
+
+            btn.addEventListener("click", () => {
+                content.classList.toggle("open");
+            });
+        });
+    </script>
 </head>
 
 <body>
 
-<div id="transition" class="transition-discussions"></div>
-<div id="header"></div>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="assets/svg/logo.svg" alt="Modernity Logo">
+            <span>Modernity</span>
+        </div>
 
-<main class="content">
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="discussions.html" class="active">Discussions</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
 
     <section class="hero">
         <h1>Discussions</h1>
         <p>Ideas, theories, and conversations that shape the Modernity design philosophy.</p>
     </section>
 
+    <!-- Collapsible Tab -->
+    <div class="tab-group">
+        <button id="discussions-tab-btn" class="tab-button">View All Discussion Topics</button>
+
+        <div id="discussions-tab-content" class="tab-content">
+            <a href="discussions/discussion-design-theory.html" class="sub-item">Design Theory</a>
+            <a href="discussions/discussion-minimal-computing.html" class="sub-item">Minimal Computing</a>
+            <a href="discussions/discussion-future-interfaces.html" class="sub-item">Future Interfaces</a>
+        </div>
+    </div>
+
     <section class="widgets">
 
-        <a href="discussion-design-theory.html" class="widget discussion-tab">
+        <a href="discussions/discussion-design-theory.html" class="widget discussion-tab">
             <h2>Design Theory</h2>
             <p>Exploring geometric UI principles and utopian aesthetics.</p>
         </a>
 
-        <a href="discussion-minimal-computing.html" class="widget discussion-tab">
+        <a href="discussions/discussion-minimal-computing.html" class="widget discussion-tab">
             <h2>Minimal Computing</h2>
             <p>Building elegant systems on low‑power hardware.</p>
         </a>
 
-        <a href="discussion-future-interfaces.html" class="widget discussion-tab">
+        <a href="discussions/discussion-future-interfaces.html" class="widget discussion-tab">
             <h2>Future Interfaces</h2>
             <p>Speculating on the next generation of personal digital spaces.</p>
         </a>
@@ -44,7 +130,9 @@
 
 </main>
 
-<div id="footer"></div>
+<footer>
+    Modernity © 2026 — Crafted with intention
+</footer>
 
 </body>
 </html>
