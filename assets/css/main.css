@@ -136,7 +136,7 @@ body.loaded {
 
 /* Active page */
 .nav a.active {
-    color: var(--accent);
+    color: var(--fg);
     border-color: var(--accent); /* only active gets cyan border */
 }
 
