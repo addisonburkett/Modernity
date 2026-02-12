@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Modernity</title>
-    <script>
-        window.componentPathPrefix = "";
-        window.headerFile = "components/header.html";
-    </script>
+
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
 
-<div id="transition"></div>
-<div id="header"></div>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="assets/svg/logo.svg" alt="Modernity Logo">
+            <span>Modernity</span>
+        </div>
 
-<main class="content">
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="discussions.html">Discussions</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
     <section class="hero">
         <h1>Welcome to Modernity</h1>
         <p>A utopian digital environment crafted with precision.</p>
@@ -38,9 +49,12 @@
             <p>Widget placeholder</p>
         </div>
     </section>
+
 </main>
 
-<div id="footer"></div>
+<footer>
+    Modernity © 2026 — Crafted with intention
+</footer>
 
 </body>
 </html>

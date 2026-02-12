@@ -1,3 +1,6 @@
+/* ------------------------------
+   Root Theme
+------------------------------ */
 :root {
     --bg: #0f0f1a;
     --bg2: #1a1a2e;
@@ -5,53 +8,130 @@
     --accent: #8BE7FF;
     --glass: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.15);
-    --transition-speed: 0.6s;
+
+    /* React-style spacing scale */
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-5: 48px;
+
+    /* Container width */
+    --container-width: 1200px;
 }
 
+/* ------------------------------
+   Base
+------------------------------ */
 body {
     margin: 0;
     font-family: "Segoe UI", sans-serif;
     background: linear-gradient(135deg, var(--bg), var(--bg2));
     color: var(--fg);
+
+    /* New transition system */
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
-/* Header */
-.header {
+body.loaded {
+    opacity: 1;
+}
+
+/* ------------------------------
+   Container
+------------------------------ */
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+}
+
+/* ------------------------------
+   Header (fixed, glassy)
+------------------------------ */
+.site-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.35);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000;
+}
+
+.header-inner {
     display: flex;
     justify-content: space-between;
-    padding: 20px 40px;
     align-items: center;
+    height: 72px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-2);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.logo img {
+    height: 32px;
 }
 
 .nav {
     display: flex;
-    gap: 20px;
+    gap: var(--space-3);
 }
 
-.nav-btn {
-    padding: 10px 20px;
+.nav a {
     color: var(--fg);
     text-decoration: none;
-    position: relative;
-    transition: 0.3s;
+    padding: var(--space-1) var(--space-2);
+    border-radius: 8px;
+    transition: 0.2s;
 }
 
-.nav-btn:hover {
-    color: var(--accent);
+.nav a:hover {
+    background: var(--glass);
+    border: 1px solid var(--accent);
 }
 
-/* Glass widgets */
+/* ------------------------------
+   Hero Section
+------------------------------ */
+.hero {
+    padding-top: 160px; /* account for fixed header */
+    padding-bottom: var(--space-5);
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: var(--space-3);
+}
+
+.hero p {
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+/* ------------------------------
+   Widgets Grid
+------------------------------ */
+.widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+    padding-bottom: var(--space-5);
+}
+
 .widget {
     background: var(--glass);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: 20px;
+    padding: var(--space-3);
     backdrop-filter: blur(10px);
     transition: 0.3s;
 }
@@ -61,16 +141,12 @@ body {
     border-color: var(--accent);
 }
 
-/* Page transition */
-.page-transition {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle, #ffffff10, #000000);
-    z-index: 999;
-    opacity: 1;
-    transition: opacity var(--transition-speed) ease;
-}
-
-.page-transition.fade-out {
-    opacity: 0;
+/* ------------------------------
+   Footer
+------------------------------ */
+footer {
+    text-align: center;
+    padding: var(--space-4);
+    opacity: 0.6;
+    margin-top: var(--space-5);
 }
