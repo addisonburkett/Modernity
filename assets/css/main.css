@@ -84,7 +84,7 @@ body.loaded {
 }
 
 /* ------------------------------
-   Navigation Buttons (MATCH WIDGETS)
+   Navigation Buttons
 ------------------------------ */
 .nav {
     display: flex;
@@ -93,28 +93,28 @@ body.loaded {
 
 .nav a {
     position: relative;
-    color: var(--fg);
     text-decoration: none;
 
-    /* Match widget appearance */
+    /* Always match widget shape */
     background: var(--glass);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--accent); /* always cyan border */
     backdrop-filter: blur(10px);
 
     padding: 10px 18px;
-    border-radius: 12px; /* Your choice B */
+    border-radius: 12px;
+
+    color: var(--fg); /* always white text */
     transition: 0.25s ease;
     overflow: hidden;
 }
 
-/* Hover: lift + accent border */
+/* Hover: lift + accent text */
 .nav a:hover {
     transform: translateY(-3px);
-    border-color: var(--accent);
     color: var(--accent);
 }
 
-/* Neon underline animation */
+/* Underline (default white) */
 .nav a::after {
     content: "";
     position: absolute;
@@ -122,22 +122,24 @@ body.loaded {
     bottom: 4px;
     width: 0%;
     height: 2px;
-    background: var(--accent);
+    background: var(--fg); /* white underline */
     transition: width 0.25s ease, left 0.25s ease;
 }
 
+/* Hover underline becomes cyan */
 .nav a:hover::after {
+    background: var(--accent);
     width: 80%;
     left: 10%;
 }
 
 /* Active page */
 .nav a.active {
-    border-color: var(--accent);
-    color: var(--accent);
+    color: var(--accent); /* cyan text */
 }
 
 .nav a.active::after {
+    background: var(--accent); /* cyan underline */
     width: 80%;
     left: 10%;
 }
