@@ -111,8 +111,8 @@ body.loaded {
 /* Hover: lift + accent text */
 .nav a:hover {
     transform: translateY(-3px);
-    color: var(--accent);
-    border-color: var(--accent);
+    color: var(--fg); /* keep text white*/
+    border-color: var(--accent); /* keep cyan border */
 }
 
 /* Underline (default white) */
