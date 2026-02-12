@@ -140,11 +140,12 @@ body.loaded {
     border-color: var(--accent); /* only active gets cyan border */
 }
 
-.nav a.active::after {
-    background: var(--accent);
+/*.nav a.active::after {
+    background: var(--accent); /* Draws the cyan underline 
     width: 80%;
     left: 10%;
-}
+} 
+*/
 
 /* ------------------------------
    Hero Section
