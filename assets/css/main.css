@@ -29,9 +29,12 @@ body {
     background: linear-gradient(135deg, var(--bg), var(--bg2));
     color: var(--fg);
 
-    /* New transition system */
+    /* Fade-in transition */
     opacity: 0;
     transition: opacity 0.6s ease;
+
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
 }
 
 body.loaded {
@@ -80,6 +83,9 @@ body.loaded {
     height: 32px;
 }
 
+/* ------------------------------
+   Navigation Buttons (MATCH WIDGET STYLE)
+------------------------------ */
 .nav {
     display: flex;
     gap: var(--space-3);
@@ -90,22 +96,22 @@ body.loaded {
     color: var(--fg);
     text-decoration: none;
     padding: 10px 18px;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: color 0.25s ease;
-}
+    border-radius: 12px;
 
-/* Glassy background on hover */
-.nav a::before {
-    content: "";
-    position: absolute;
-    inset: 0;
+    /* Match widget appearance */
     background: var(--glass);
     border: 1px solid var(--glass-border);
-    border-radius: 10px;
-    opacity: 0;
-    transform: scale(0.85);
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    backdrop-filter: blur(10px);
+
+    overflow: hidden;
+    transition: 0.25s ease;
+}
+
+/* Hover: subtle lift + neon underline */
+.nav a:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    color: var(--accent);
 }
 
 /* Neon underline animation */
@@ -120,22 +126,14 @@ body.loaded {
     transition: width 0.25s ease, left 0.25s ease;
 }
 
-/* Hover effects */
-.nav a:hover::before {
-    opacity: 1;
-    transform: scale(1);
-}
-
 .nav a:hover::after {
     width: 80%;
     left: 10%;
 }
 
-.nav a:hover {
-    color: var(--accent);
-}
-
+/* Active page highlight */
 .nav a.active {
+    border-color: var(--accent);
     color: var(--accent);
 }
 
@@ -148,7 +146,7 @@ body.loaded {
    Hero Section
 ------------------------------ */
 .hero {
-    padding-top: 160px; /* account for fixed header */
+    padding-top: 160px;
     padding-bottom: var(--space-5);
     text-align: center;
 }
@@ -168,7 +166,7 @@ body.loaded {
 ------------------------------ */
 .widgets {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: var(--space-4);
     padding-bottom: var(--space-5);
 }
@@ -193,8 +191,8 @@ body.loaded {
 
 /* Mobile (default) */
 .container {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
 
 /* Tablet */
