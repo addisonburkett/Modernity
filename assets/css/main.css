@@ -84,7 +84,7 @@ body.loaded {
 }
 
 /* ------------------------------
-   Navigation Buttons (MATCH WIDGET STYLE)
+   Navigation Buttons (MATCH WIDGETS)
 ------------------------------ */
 .nav {
     display: flex;
@@ -95,19 +95,19 @@ body.loaded {
     position: relative;
     color: var(--fg);
     text-decoration: none;
-    padding: 10px 18px;
-    border-radius: 12px;
 
     /* Match widget appearance */
     background: var(--glass);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px);
 
-    overflow: hidden;
+    padding: 10px 18px;
+    border-radius: 12px; /* Your choice B */
     transition: 0.25s ease;
+    overflow: hidden;
 }
 
-/* Hover: subtle lift + neon underline */
+/* Hover: lift + accent border */
 .nav a:hover {
     transform: translateY(-3px);
     border-color: var(--accent);
@@ -131,7 +131,7 @@ body.loaded {
     left: 10%;
 }
 
-/* Active page highlight */
+/* Active page */
 .nav a.active {
     border-color: var(--accent);
     color: var(--accent);
