@@ -274,7 +274,7 @@ body.loaded {
     margin-bottom: 28px;
 }
 
-.form-options a {
+/*.form-options a {
     opacity: 0.7;
     text-decoration: none;
 }
@@ -282,7 +282,7 @@ body.loaded {
 .form-options a:hover {
     color: var(--accent);
     opacity: 1;
-}
+}*/
 
 .btn-primary {
     width: 100%;
@@ -312,8 +312,22 @@ body.loaded {
     opacity: 0.75;
 }
 
-.auth-footer a:hover {
+/*.auth-footer a:hover {
     color: var(--accent);
+}*/
+
+.form-options a,
+.auth-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.25s ease;
+}
+
+.form-options a:hover,
+.auth-footer a:hover {
+    color: #baf2ff; /* slightly brighter hover */
+    text-shadow: 0 0 8px rgba(139,231,255,0.4);
 }
 
 
