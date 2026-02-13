@@ -9,7 +9,7 @@
     --glass: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.15);
 
-    /* React-style spacing scale */
+    /* Spacing scale (kept for consistency) */
     --space-1: 8px;
     --space-2: 16px;
     --space-3: 24px;
@@ -29,11 +29,9 @@ body {
     background: linear-gradient(135deg, var(--bg), var(--bg2));
     color: var(--fg);
 
-    /* Fade-in transition */
     opacity: 0;
     transition: opacity 0.6s ease;
 
-    /* Prevent horizontal scroll on mobile */
     overflow-x: hidden;
 }
 
@@ -42,13 +40,16 @@ body.loaded {
 }
 
 /* ------------------------------
-   Container
+   Container (now fluid)
 ------------------------------ */
 .container {
     width: 100%;
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 var(--space-3);
+
+    /* Fluid padding */
+    padding-left: clamp(12px, 5vw, 124px);
+    padding-right: clamp(12px, 5vw, 124px);
 }
 
 /* ------------------------------
@@ -68,51 +69,58 @@ body.loaded {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 72px;
+
+    /* Fluid header height */
+    height: clamp(56px, 8vh, 72px);
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    font-size: 20px;
+
+    /* Fluid logo text size */
+    font-size: clamp(16px, 2vw, 20px);
     font-weight: 600;
 }
 
 .logo img {
-    height: 32px;
+    height: clamp(24px, 4vh, 32px);
 }
 
 /* ------------------------------
-   Navigation Buttons
+   Navigation Buttons (fluid)
 ------------------------------ */
 .nav {
     display: flex;
-    gap: var(--space-3);
+    gap: clamp(12px, 2vw, 24px);
 }
 
 .nav a {
     position: relative;
     text-decoration: none;
 
-    /* Match widget appearance */
     background: var(--glass);
-    border: 1px solid var(--glass-border); /* <-- FIXED: no more cyan here */
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px);
 
-    padding: 10px 18px;
+    /* Fluid padding */
+    padding: clamp(8px, 1vw, 12px) clamp(14px, 2vw, 18px);
+
     border-radius: 12px;
 
-    color: var(--fg); /* always white text */
+    /* Fluid text size */
+    font-size: clamp(14px, 1.4vw, 18px);
+
+    color: var(--fg);
     transition: 0.25s ease;
     overflow: hidden;
 }
 
-/* Hover: lift + accent text */
 .nav a:hover {
     transform: translateY(-3px);
-    color: var(--fg); /* keep text white*/
-    border-color: var(--accent); /* keep cyan border */
+    color: var(--fg);
+    border-color: var(--accent);
 }
 
 /* Underline (default white) */
@@ -120,14 +128,13 @@ body.loaded {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 4px;
+    bottom: clamp(2px, 0.4vw, 4px);
     width: 0%;
     height: 2px;
-    background: var(--fg); /* white underline */
+    background: var(--fg);
     transition: width 0.25s ease, left 0.25s ease;
 }
 
-/* Hover underline becomes cyan */
 .nav a:hover::after {
     background: var(--accent);
     width: 80%;
@@ -137,42 +144,35 @@ body.loaded {
 /* Active page */
 .nav a.active {
     color: var(--fg);
-    border-color: var(--accent); /* only active gets cyan border */
+    border-color: var(--accent);
 }
 
-/*.nav a.active::after {
-    background: var(--accent); /* Draws the cyan underline 
-    width: 80%;
-    left: 10%;
-} 
-*/
-
 /* ------------------------------
-   Hero Section
+   Hero Section (fluid)
 ------------------------------ */
 .hero {
-    padding-top: 160px;
-    padding-bottom: var(--space-5);
+    padding-top: clamp(120px, 18vh, 160px);
+    padding-bottom: clamp(32px, 6vh, 48px);
     text-align: center;
 }
 
 .hero h1 {
-    font-size: 48px;
+    font-size: clamp(28px, 6vw, 48px);
     margin-bottom: var(--space-3);
 }
 
 .hero p {
-    font-size: 20px;
+    font-size: clamp(16px, 2vw, 20px);
     opacity: 0.8;
 }
 
 /* ------------------------------
-   Widgets Grid
+   Widgets Grid (already fluid)
 ------------------------------ */
 .widgets {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--space-4);
+    gap: clamp(20px, 4vw, 32px);
     padding-bottom: var(--space-5);
 }
 
@@ -180,7 +180,10 @@ body.loaded {
     background: var(--glass);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: var(--space-3);
+
+    /* Fluid padding */
+    padding: clamp(16px, 3vw, 24px);
+
     backdrop-filter: blur(10px);
     transition: 0.3s;
 }
@@ -191,37 +194,127 @@ body.loaded {
 }
 
 /* ------------------------------
-   Responsive Layout Margins
+   Auth (Login Page)
 ------------------------------ */
-
-/* Mobile (default) */
-.container {
-    padding-left: 12px;
-    padding-right: 12px;
+.auth-wrapper {
+    padding-top: clamp(140px, 20vh, 180px);
+    padding-bottom: var(--space-5);
+    display: flex;
+    justify-content: center;
 }
 
-/* Tablet */
-@media (min-width: 600px) {
-    .container {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+
+    padding: clamp(24px, 4vw, 36px);
+    backdrop-filter: blur(12px);
+
+    transition: 0.3s ease;
 }
 
-/* Desktop */
-@media (min-width: 1024px) {
-    .container {
-        padding-left: 124px;
-        padding-right: 124px;
-    }
+.auth-card:hover {
+    border-color: var(--accent);
 }
+
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: var(--space-3);
+    font-size: clamp(22px, 4vw, 28px);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-3);
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.form-group input {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+
+    padding: 12px;
+    color: var(--fg);
+    font-size: 14px;
+
+    transition: 0.25s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: var(--space-3);
+}
+
+.forgot-link {
+    text-decoration: none;
+    opacity: 0.7;
+    transition: 0.25s ease;
+}
+
+.forgot-link:hover {
+    color: var(--accent);
+    opacity: 1;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+
+    border-radius: 14px;
+    border: 1px solid var(--accent);
+
+    background: var(--glass);
+    color: var(--fg);
+
+    font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+.auth-footer {
+    margin-top: var(--space-3);
+    text-align: center;
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+.auth-footer a:hover {
+    color: var(--accent);
+}
+
 
 /* ------------------------------
    Footer
 ------------------------------ */
 footer {
     text-align: center;
-    padding: var(--space-4);
+    padding: clamp(24px, 4vw, 32px);
     opacity: 0.6;
     margin-top: var(--space-5);
 }
