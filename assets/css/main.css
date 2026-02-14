@@ -220,7 +220,7 @@ body {
    AUTH PAGE
 ============================== */
 .auth-wrapper {
-    min-height: calc(100vh - clamp(56px, 8vh, 72px) - 120px); /* subtract footer height */
+    min-height: calc(100vh - clamp(56px, 8vh, 72px) - 120px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -228,6 +228,7 @@ body {
     padding-bottom: 40px;
 }
 
+/* AUTH CARD INTRO ANIMATION WITH GLOW */
 .auth-card {
     width: 100%;
     max-width: 480px;
@@ -236,6 +237,29 @@ body {
     border-radius: 24px;
     padding: 48px 40px;
     backdrop-filter: blur(16px);
+
+    opacity: 0;
+    transform: translateY(40px);
+    animation: authIntro 1.6s ease forwards;
+    box-shadow: 0 0 0 rgba(139,231,255,0);
+}
+
+@keyframes authIntro {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+        box-shadow: 0 0 0 rgba(139,231,255,0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-6px);
+        box-shadow: 0 0 28px rgba(139,231,255,0.55);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0 0 12px rgba(139,231,255,0.25);
+    }
 }
 
 .auth-card h1 {
