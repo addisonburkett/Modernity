@@ -205,12 +205,6 @@ body {
 /* ==============================
    SCROLL REVEAL
 ============================== */
-/* Prevent reveal elements from being hidden before the page finishes loading */
-/*body:not(.loaded) .reveal {
-    opacity: 1 !important;
-    transform: none !important;
-}*/
-
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -226,10 +220,12 @@ body {
    AUTH PAGE
 ============================== */
 .auth-wrapper {
-    height: calc(100vh - clamp(56px, 8vh, 72px));
+    min-height: calc(100vh - clamp(56px, 8vh, 72px) - 120px); /* subtract footer height */
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .auth-card {
@@ -240,6 +236,35 @@ body {
     border-radius: 24px;
     padding: 48px 40px;
     backdrop-filter: blur(16px);
+}
+
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--accent);
+    background: var(--glass);
+    color: var(--fg);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    color: #000;
 }
 
 .form-group {
