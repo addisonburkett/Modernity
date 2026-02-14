@@ -42,6 +42,83 @@
         </div>
     </section>
 
+<section id="features" class="section reveal">
+    <div class="container">
+        <h2 class="section-title">Why Modernity Exists</h2>
+        <p style="max-width: 800px; margin: 0 auto; text-align:center; opacity:0.8;">
+            Modernity was created to bring structure, elegance, and intentionality
+            to digital workspaces. It removes noise, emphasizes clarity, and
+            provides a foundation that grows with your ideas.
+        </p>
+    </div>
+</section>
+
+<section class="section reveal">
+    <div class="container">
+        <h2 class="section-title">Design Principles</h2>
+
+        <div class="grid-3">
+            <div class="card">
+                <h3>Intentional Layouts</h3>
+                <p>
+                    Every pixel is placed with purpose. Modernity avoids clutter
+                    and embraces meaningful structure.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Adaptive Motion</h3>
+                <p>
+                    Subtle animations guide the eye without overwhelming the
+                    experience, creating a sense of calm flow.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Scalable Systems</h3>
+                <p>
+                    From small personal projects to large collaborative
+                    environments, Modernity scales effortlessly.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal">
+    <div class="container">
+        <h2 class="section-title">Future Expansion</h2>
+
+        <p style="max-width: 800px; margin: 0 auto; text-align:center; opacity:0.8;">
+            The platform will evolve with modules for authentication, real-time
+            collaboration, project spaces, and community-driven discussions.
+            Each addition will follow the same philosophy: clarity, elegance,
+            and intentional design.
+        </p>
+    </div>
+</section>
+
+<section class="section reveal">
+    <div class="container">
+        <h2 class="section-title">Extended Vision</h2>
+
+        <p style="max-width: 800px; margin: 0 auto; text-align:center; opacity:0.8;">
+            Modernity is not just a UI system — it is a mindset. A commitment to
+            building digital environments that feel intentional, structured, and
+            deeply human. As the platform grows, it will introduce tools that
+            support creators, thinkers, and teams who value precision and
+            thoughtful design.
+        </p>
+
+        <p style="max-width: 800px; margin: 40px auto 0; text-align:center; opacity:0.8;">
+            This extended section is intentionally longer to help you test
+            scroll-based reveal timing, spacing, and animation smoothness across
+            multiple viewport sizes.
+        </p>
+    </div>
+</section>
+
+<!-- 
     <!-- FEATURES -->
     <section id="features" class="section reveal">
         <div class="container">
@@ -84,13 +161,16 @@
         </div>
     </section>
 
+-->
+
+
 </main>
 
 <footer>
     Modernity © 2026 — Crafted with intention
 </footer>
 
-<script>
+<!-- <script>
     const reveals = document.querySelectorAll(".reveal");
     window.addEventListener("scroll", () => {
         reveals.forEach(el => {
@@ -101,9 +181,9 @@
             }
         });
     });
-</script>
+</script> -->
 
-<!--<script>
+<script>
     const reveals = document.querySelectorAll(".reveal");
 
     function checkReveals() {
@@ -117,9 +197,24 @@
         });
     }
 
-    window.addEventListener("load", checkReveals);
+    // Sequential reveal after hero animation
+    window.addEventListener("load", () => {
+        // 1. Reveal section 1 after hero finishes (1.6s)
+        setTimeout(() => {
+            if (reveals[0]) reveals[0].classList.add("active");
+        }, 1600);
+
+        // 2. Reveal section 2 shortly after section 1
+        setTimeout(() => {
+            if (reveals[1]) reveals[1].classList.add("active");
+        }, 3200);
+
+        // Enable scroll reveal for everything else
+        checkReveals();
+    });
+
     window.addEventListener("scroll", checkReveals);
-</script>-->
+</script>
 
 </body>
 </html>
