@@ -90,7 +90,7 @@
     Modernity © 2026 — Crafted with intention
 </footer>
 
-<script>
+/*<script>
     const reveals = document.querySelectorAll(".reveal");
     window.addEventListener("scroll", () => {
         reveals.forEach(el => {
@@ -101,6 +101,27 @@
             }
         });
     });
+</script>*/
+
+<script>
+    const reveals = document.querySelectorAll(".reveal");
+
+    function checkReveals() {
+        const windowHeight = window.innerHeight;
+
+        reveals.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) {
+                el.classList.add("active");
+            }
+        });
+    }
+
+    // Reveal visible elements immediately on load
+    window.addEventListener("load", checkReveals);
+
+    // Reveal more elements as you scroll
+    window.addEventListener("scroll", checkReveals);
 </script>
 
 </body>
