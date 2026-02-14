@@ -92,15 +92,25 @@ body {
     color: var(--fg);
     transition: 0.25s ease;
     font-size: 15px;
+
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 rgba(139,231,255,0); /* default no glow */
 }
 
 .nav a:hover {
     border-color: var(--accent);
     transform: translateY(-3px);
+
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(139,231,255,0.55);
+    border-color: var(--glass-border); /* keep border neutral */
 }
 
 .nav a.active {
     border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(139,231,255,0.35);
+    border-color: var(--glass-border);
 }
 
 /* ==============================
@@ -191,11 +201,15 @@ body {
     padding: 40px;
     backdrop-filter: blur(12px);
     transition: 0.3s ease;
+    box-shadow: 0 0 8px rgba(139,231,255,0.12);
 }
 
 .card:hover {
     transform: translateY(-8px);
     border-color: var(--accent);
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 0 22px rgba(139,231,255,0.45);
 }
 
 .card h3 {
