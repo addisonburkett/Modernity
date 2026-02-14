@@ -140,6 +140,28 @@ body {
     color: #000;
 }
 
+/* HERO INTRO ANIMATION */
+.hero-intro {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: heroIntro 1.6s ease forwards;
+}
+
+@keyframes heroIntro {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-6px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* ==============================
    SECTION
 ============================== */
@@ -183,6 +205,12 @@ body {
 /* ==============================
    SCROLL REVEAL
 ============================== */
+/* Prevent reveal elements from being hidden before the page finishes loading */
+/*body:not(.loaded) .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}*/
+
 .reveal {
     opacity: 0;
     transform: translateY(40px);
