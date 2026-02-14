@@ -66,5 +66,15 @@
     Modernity © 2026 — Crafted with intention
 </footer>
 
+<script>
+document.querySelectorAll('.nav a, .cta-btn, .btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        btn.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+        btn.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+});
+</script>
+
 </body>
 </html>

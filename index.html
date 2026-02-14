@@ -167,19 +167,6 @@
     Modernity © 2026 — Crafted with intention
 </footer>
 
-<!-- <script>
-    const reveals = document.querySelectorAll(".reveal");
-    window.addEventListener("scroll", () => {
-        reveals.forEach(el => {
-            const windowHeight = window.innerHeight;
-            const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < windowHeight - 100) {
-                el.classList.add("active");
-            }
-        });
-    });
-</script> -->
-
 <script>
     const reveals = document.querySelectorAll(".reveal");
 
@@ -211,6 +198,16 @@
     });
 
     window.addEventListener("scroll", checkReveals);
+</script>
+
+<script>
+document.querySelectorAll('.nav a, .cta-btn, .btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        btn.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+        btn.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+});
 </script>
 
 </body>

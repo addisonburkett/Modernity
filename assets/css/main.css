@@ -356,3 +356,44 @@ footer {
     padding: 60px 0;
     opacity: 0.6;
 }
+
+/* ==============================
+   GLASS SHATTER MICRO-REFRACTION
+============================== */
+
+/* Applies to nav buttons, CTA buttons, and login button */
+.nav a,
+.cta-btn,
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+/* The refractive shimmer layer */
+.nav a::after,
+.cta-btn::after,
+.btn-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mx, 50%) var(--my, 50%),
+        rgba(139,231,255,0.35),
+        rgba(139,231,255,0.05) 40%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    backdrop-filter: blur(6px);
+    transform: scale(0.6);
+}
+
+/* Hover: refractive flash + glow */
+.nav a:hover::after,
+.cta-btn:hover::after,
+.btn-primary:hover::after {
+    opacity: 1;
+    transform: scale(1.15);
+}
