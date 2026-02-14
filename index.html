@@ -200,15 +200,5 @@
     window.addEventListener("scroll", checkReveals);
 </script>
 
-<script>
-document.querySelectorAll('.nav a, .cta-btn, .btn-primary').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        btn.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-        btn.style.setProperty('--my', `${e.clientY - rect.top}px`);
-    });
-});
-</script>
-
 </body>
 </html>
