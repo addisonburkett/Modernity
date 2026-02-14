@@ -321,7 +321,6 @@ body {
 }
 
 .btn-primary:hover {
-    transform: translateY(-6px);
     border-color: var(--accent);
     box-shadow: 0 0 22px rgba(139,231,255,0.45);
 }
