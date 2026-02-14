@@ -103,13 +103,13 @@ body {
     transform: translateY(-3px);
 
     transform: translateY(-3px);
-    box-shadow: 0 0 18px rgba(139,231,255,0.55);
+    box-shadow: 0 0 12px rgba(139,231,255,0.45); /* smaller radius, lighter color */
     border-color: var(--glass-border); /* keep border neutral */
 }
 
 .nav a.active {
     border-color: var(--accent);
-    box-shadow: 0 0 10px rgba(139,231,255,0.35);
+    box-shadow: 0 0 8px rgba(139,231,255,0.28); /* dimmer + tighter */
     border-color: var(--glass-border);
 }
 
