@@ -146,9 +146,11 @@ body {
 }
 
 .hero .cta-btn:hover {
-    background: var(--accent);
-    color: #000;
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 0 22px rgba(139,231,255,0.45);
 }
+
 
 /* HERO INTRO ANIMATION */
 .hero-intro {
@@ -301,8 +303,9 @@ body {
 }
 
 .btn-primary:hover {
-    background: var(--accent);
-    color: #000;
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 0 22px rgba(139,231,255,0.45);
 }
 
 .form-group {
