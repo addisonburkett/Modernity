@@ -425,6 +425,11 @@ body {
     transition: 0.25s ease;
 }
 
+.workspace-logo:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 24px rgba(139,231,255,0.7);
+}
+
 /* Title text */
 .workspace-title {
     font-size: clamp(18px, 2.2vw, 24px);
@@ -462,6 +467,12 @@ body {
     color: var(--fg);
     box-shadow: 0 0 12px rgba(139,231,255,0.35);
     transform: translateY(-2px);
+}
+
+.ws-btn.small {
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 6px;
 }
 
 /* Make Create Folder button match header buttons */
@@ -663,14 +674,14 @@ body {
 
 /* HEADER LAYOUT: two columns */
 .workspace-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: clamp(180px, 20vw, 280px) auto 1fr;
     align-items: center;
     height: clamp(56px, 8vh, 72px);
     background: var(--glass);
     border-bottom: 1px solid var(--glass-border);
     backdrop-filter: blur(16px);
-    padding: 0 clamp(20px, 3vw, 40px);
+    padding: 0 20px;
 }
 
 /* LEFT COLUMN */
@@ -679,6 +690,24 @@ body {
     align-items: center;
     justify-content: center; /* centers logo + title */
     width: clamp(180px, 20vw, 280px); /* EXACT width of sidebar */
+}
+
+.logo-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actions-col {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.title-col {
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
 }
 
 /* Logo + title centered inside left column */
