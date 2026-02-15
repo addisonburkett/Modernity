@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard | Modernity</title>
+<title>Dashboard  |  Modernity</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/svg/favicon.svg">
+
 <link rel="stylesheet" href="assets/css/main.css">
 
 <style>
@@ -28,7 +32,19 @@
 }
 
 .sidebar h3 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+/* Accessibility bubble under Navigation */
+.sidebar-tip {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-bottom: 18px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--glass-border);
+    padding: 8px 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
 }
 
 .sidebar p.folder {
@@ -200,18 +216,18 @@
 <header class="workspace-header">
 
     <div class="workspace-left">
-        <!-- Logo + title wrapper -->
+
+        <!-- LOGO ONLY is clickable -->
         <a href="index.html" class="logo-link">
-            <!-- adjust logo size via .workspace-logo in main.css -->
             <img src="assets/svg/favicon.svg" alt="Modernity logo" class="workspace-logo">
-            <!-- adjust spacing between logo and title via .workspace-title in main.css -->
-            <span class="workspace-title">Modernity Vault</span>
         </a>
+
+        <!-- TITLE is NOT clickable -->
+        <span class="workspace-title">Modernity Vault</span>
 
         <button class="hamburger" id="hamburgerBtn">☰</button>
 
         <nav class="workspace-nav" id="workspaceNav">
-            <!-- Action buttons (no Home) -->
             <button class="ws-btn">⬆️ Upload</button>
             <button class="ws-btn">📁 New Folder</button>
             <button class="ws-btn">🔗 Share</button>
@@ -235,6 +251,12 @@
 
 <aside class="sidebar">
 <h3>Navigation</h3>
+
+<div class="sidebar-tip">
+    Tip: Create new folders using the input below.  
+    They will appear inside the selected directory.
+</div>
+
 <p class="folder" onclick="navigateToFolder('documents')">📁 Documents</p>
 <p class="folder" onclick="navigateToFolder('pictures')">📁 Pictures</p>
 <p class="folder" onclick="navigateToFolder('root')">📁 Home</p>
