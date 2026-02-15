@@ -389,12 +389,22 @@ body {
 }
 
 /* Align header content with sidebar */
+/* LOGO + TITLE should sit flush left above the sidebar */
 .workspace-left {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 2.5vw, 32px); /* adjust spacing between logo+title and buttons */
-    padding-left: clamp(180px, 20vw, 280px);
+    gap: clamp(16px, 2.5vw, 32px);
+    padding-left: 0; /* remove sidebar padding */
 }
+
+/* ACTION BUTTONS get the sidebar alignment instead */
+.workspace-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 16px);
+    padding-left: clamp(180px, 20vw, 280px); /* aligns buttons with sidebar */
+}
+
 
 /* Logo + title link */
 .logo-link {
@@ -449,6 +459,28 @@ body {
 .ws-btn:hover {
     border-color: var(--accent);
     /* keep text white on hover */
+    color: var(--fg);
+    box-shadow: 0 0 12px rgba(139,231,255,0.35);
+    transform: translateY(-2px);
+}
+
+/* Make Create Folder button match header buttons */
+.dashboard .btn-primary {
+    width: auto;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(139,231,255,0.08);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(6px);
+    color: var(--fg);
+    font-size: clamp(12px, 1vw, 14px);
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: none;
+}
+
+.dashboard .btn-primary:hover {
+    border-color: var(--accent);
     color: var(--fg);
     box-shadow: 0 0 12px rgba(139,231,255,0.35);
     transform: translateY(-2px);
@@ -545,6 +577,31 @@ body {
     .workspace-nav.open {
         display: flex;
     }
+}
+
+/* Sidebar new folder input/button */
+.sidebar-new-folder {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.sidebar-new-folder input {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: var(--fg);
+    transition: 0.25s ease;
+}
+
+.sidebar-new-folder input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(139,231,255,0.35);
+    transform: translateY(-1px);
 }
 
 /* ==============================
