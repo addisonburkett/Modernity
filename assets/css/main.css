@@ -368,6 +368,160 @@ body {
     color: #9adfff;
 }
 
+/* ===============================
+   WORKSPACE HEADER (Modernity)
+=============================== */
+
+.workspace-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: clamp(48px, 7vh, 64px);
+    background: var(--glass);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1500;
+    padding-right: clamp(12px, 2vw, 48px);
+}
+
+/* Align header content with sidebar */
+.workspace-left {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+    padding-left: clamp(180px, 20vw, 280px);
+}
+
+/* Logo */
+.workspace-header .logo {
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 600;
+    color: var(--fg);
+}
+
+/* Navigation buttons */
+.workspace-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 16px);
+}
+
+.ws-btn {
+    background: rgba(139,231,255,0.08);
+    border: 1px solid var(--glass-border);
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: clamp(12px, 1vw, 14px);
+    color: var(--fg);
+    cursor: pointer;
+    transition: 0.25s ease;
+    backdrop-filter: blur(6px);
+}
+
+.ws-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 12px rgba(139,231,255,0.35);
+    transform: translateY(-2px);
+}
+
+/* Avatar */
+.avatar-wrapper {
+    position: relative;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.avatar:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(139,231,255,0.35);
+}
+
+/* Avatar dropdown */
+.avatar-menu {
+    position: absolute;
+    top: 46px;
+    right: 0;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    padding: 10px 0;
+    display: none;
+    min-width: 160px;
+}
+
+.avatar-menu.open {
+    display: block;
+}
+
+.avatar-menu button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    text-align: left;
+    color: var(--fg);
+    cursor: pointer;
+}
+
+.avatar-menu button:hover {
+    background: rgba(139,231,255,0.1);
+}
+
+/* Hamburger (mobile) */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: var(--fg);
+    cursor: pointer;
+}
+
+/* Mobile collapse */
+@media(max-width: 900px){
+    .workspace-left {
+        padding-left: 20px;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .workspace-nav {
+        position: absolute;
+        top: clamp(48px, 7vh, 64px);
+        left: 0;
+        width: 100%;
+        background: var(--glass);
+        border-bottom: 1px solid var(--glass-border);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        padding: 12px 0;
+        display: none;
+    }
+
+    .workspace-nav.open {
+        display: flex;
+    }
+}
+
 /* ==============================
    FOOTER
 ============================== */

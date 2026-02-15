@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard | Modernity</title>
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="assets/css/main.css">
 
 <style>
 /* ===============================
@@ -160,10 +160,35 @@
 
 <body>
 
-<header class="site-header">
-<div class="container header-inner">
-    <div class="logo">MyCloud</div>
-</div>
+<!-- ===============================
+     WORKSPACE HEADER (NEW)
+=============================== -->
+<header class="workspace-header">
+
+    <div class="workspace-left">
+        <div class="logo">Modernity Vault</div>
+
+        <button class="hamburger" id="hamburgerBtn">☰</button>
+
+        <nav class="workspace-nav" id="workspaceNav">
+            <a href="index.html" class="ws-btn">🏠 Home</a>
+            <button class="ws-btn">⬆️ Upload</button>
+            <button class="ws-btn">📁 New Folder</button>
+            <button class="ws-btn">🔗 Share</button>
+            <button class="ws-btn">⚙️ Preferences</button>
+            <button class="ws-btn">❓ Help</button>
+        </nav>
+    </div>
+
+    <div class="avatar-wrapper">
+        <div class="avatar" id="avatarBtn">👤</div>
+        <div class="avatar-menu" id="avatarMenu">
+            <button>Profile</button>
+            <button>Account Settings</button>
+            <button>Sign Out</button>
+        </div>
+    </div>
+
 </header>
 
 <div class="dashboard">
@@ -239,7 +264,6 @@ const DataLayer = (function(){
             return findFolder(path).children;
         },
         createFolder(path, name){
-            // Firebase: replace with Firestore push
             findFolder(path).children.push({
                 id: Date.now().toString(),
                 name,
@@ -248,7 +272,6 @@ const DataLayer = (function(){
             });
         },
         deleteItem(path, id){
-            // Firebase: replace with Firestore delete
             const folder = findFolder(path);
             folder.children = folder.children.filter(c => c.id !== id);
         }
@@ -359,9 +382,25 @@ function createFolder(){
         DataLayer.createFolder(currentPath, folderName);
         document.getElementById("newFolderName").value = "";
         render();
-        // Firebase: push new folder to Firestore here
     }
 }
+
+/* ===============================
+   HEADER INTERACTIONS
+=============================== */
+
+const avatarBtn = document.getElementById("avatarBtn");
+const avatarMenu = document.getElementById("avatarMenu");
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const workspaceNav = document.getElementById("workspaceNav");
+
+avatarBtn.onclick = () => {
+    avatarMenu.classList.toggle("open");
+};
+
+hamburgerBtn.onclick = () => {
+    workspaceNav.classList.toggle("open");
+};
 
 render();
 </script>
