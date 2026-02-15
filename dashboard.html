@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link rel="stylesheet" href="main.css">
+
+<style>
+
+/* ===============================
+   Layout
+=============================== */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    padding-top: clamp(56px, 8vh, 72px);
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 250px;
+    background: var(--glass);
+    border-right: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    padding: 30px 20px;
+    transition: 0.3s ease;
+}
+
+/* Main */
+
+.main-content {
+    flex: 1;
+    padding: 40px clamp(16px, 3vw, 60px);
+}
+
+/* Breadcrumb */
+
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.breadcrumb span {
+    cursor: pointer;
+}
+
+.breadcrumb span:hover {
+    color: var(--accent);
+}
+
+/* Grid */
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.file-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    padding: 20px;
+    backdrop-filter: blur(12px);
+    transition: 0.25s ease;
+    box-shadow: 0 0 8px rgba(139,231,255,0.12);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.file-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+    box-shadow: 0 0 22px rgba(139,231,255,0.45);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.file-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.file-name {
+    font-size: 14px;
+    word-break: break-word;
+}
+
+/* Context Menu */
+
+.context-menu {
+    position: fixed;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 10px 0;
+    display: none;
+    z-index: 2000;
+}
+
+.context-menu button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    text-align: left;
+    color: var(--fg);
+    cursor: pointer;
+}
+
+.context-menu button:hover {
+    background: rgba(139,231,255,0.1);
+}
+
+/* Preview Modal */
+
+.preview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.preview-modal {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    border-radius: 18px;
+    backdrop-filter: blur(16px);
+    max-width: 400px;
+    width: 90%;
+}
+
+/* Mobile */
+
+@media(max-width: 900px){
+    .sidebar {
+        display: none;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+<div class="container header-inner">
+<div class="logo">MyCloud</div>
+</div>
+</header>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+<h3>Navigation</h3>
+<p>All Files</p>
+</aside>
+
+<main class="main-content">
+
+<div class="breadcrumb" id="breadcrumb"></div>
+<div class="file-grid" id="grid"></div>
+
+</main>
+</div>
+
+<!-- Context Menu -->
+<div class="context-menu" id="contextMenu">
+<button id="previewBtn">Preview</button>
+<button id="deleteBtn">Delete</button>
+</div>
+
+<!-- Preview Modal -->
+<div class="preview-overlay" id="previewOverlay">
+<div class="preview-modal">
+<h3 id="previewTitle"></h3>
+<p>File preview placeholder.</p>
+<button class="btn-primary" onclick="closePreview()">Close</button>
+</div>
+</div>
+
+<script>
+
+/* ===============================
+   DATA LAYER (Firebase-ready)
+=============================== */
+
+const DataLayer = (function(){
+
+    let structure = {
+        root: {
+            id: "root",
+            name: "root",
+            type: "folder",
+            children: [
+                { id:"1", name:"Projects", type:"folder", children:[] },
+                { id:"2", name:"photo.png", type:"file" }
+            ]
+        }
+    };
+
+    function findFolder(path){
+        let current = structure.root;
+        for(let id of path){
+            current = current.children.find(c => c.id === id);
+        }
+        return current;
+    }
+
+    return {
+
+        getFiles(path){
+            return findFolder(path).children;
+        },
+
+        createFolder(path, name){
+            findFolder(path).children.push({
+                id: Date.now().toString(),
+                name,
+                type:"folder",
+                children:[]
+            });
+        },
+
+        deleteItem(path, id){
+            const folder = findFolder(path);
+            folder.children = folder.children.filter(c => c.id !== id);
+        }
+
+    }
+
+})();
+
+/* ===============================
+   UI LOGIC
+=============================== */
+
+let currentPath = [];
+let selectedItem = null;
+
+const grid = document.getElementById("grid");
+const breadcrumb = document.getElementById("breadcrumb");
+const contextMenu = document.getElementById("contextMenu");
+
+function render(){
+
+    grid.innerHTML = "";
+    const files = DataLayer.getFiles(currentPath);
+
+    files.forEach(file => {
+
+        const card = document.createElement("div");
+        card.className = "file-card";
+
+        const icon = file.type === "folder" ? "📁" : "📄";
+
+        card.innerHTML = `
+            <div class="file-icon">${icon}</div>
+            <div class="file-name">${file.name}</div>
+        `;
+
+        card.onclick = () => {
+            if(file.type === "folder"){
+                currentPath.push(file.id);
+                render();
+            }
+        };
+
+        card.oncontextmenu = (e) => {
+            e.preventDefault();
+            selectedItem = file;
+            contextMenu.style.display = "block";
+            contextMenu.style.left = e.pageX + "px";
+            contextMenu.style.top = e.pageY + "px";
+        };
+
+        grid.appendChild(card);
+    });
+
+    renderBreadcrumb();
+}
+
+function renderBreadcrumb(){
+    breadcrumb.innerHTML = `<span onclick="goHome()">Home</span>`;
+    currentPath.forEach((id,index)=>{
+        breadcrumb.innerHTML += " / ";
+        breadcrumb.innerHTML += `<span onclick="goTo(${index})">Folder</span>`;
+    });
+}
+
+function goHome(){
+    currentPath = [];
+    render();
+}
+
+function goTo(index){
+    currentPath = currentPath.slice(0,index+1);
+    render();
+}
+
+/* Context Actions */
+
+document.getElementById("deleteBtn").onclick = () => {
+    DataLayer.deleteItem(currentPath, selectedItem.id);
+    contextMenu.style.display = "none";
+    render();
+};
+
+document.getElementById("previewBtn").onclick = () => {
+    document.getElementById("previewTitle").innerText = selectedItem.name;
+    document.getElementById("previewOverlay").style.display = "flex";
+    contextMenu.style.display = "none";
+};
+
+document.addEventListener("click", () => {
+    contextMenu.style.display = "none";
+});
+
+function closePreview(){
+    document.getElementById("previewOverlay").style.display = "none";
+}
+
+render();
+
+</script>
+
+</body>
+</html>
