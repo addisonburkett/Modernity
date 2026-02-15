@@ -377,7 +377,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: clamp(48px, 7vh, 64px);
+    height: clamp(56px, 8vh, 72px);
     background: var(--glass);
     border-bottom: 1px solid var(--glass-border);
     backdrop-filter: blur(16px);
@@ -392,22 +392,46 @@ body {
 .workspace-left {
     display: flex;
     align-items: center;
-    gap: clamp(20px, 3vw, 40px);
+    gap: clamp(16px, 2.5vw, 32px); /* adjust spacing between logo+title and buttons */
     padding-left: clamp(180px, 20vw, 280px);
 }
 
-/* Logo */
-.workspace-header .logo {
-    font-size: clamp(18px, 2vw, 22px);
-    font-weight: 600;
+/* Logo + title link */
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 18px); /* adjust spacing between logo and title */
+    text-decoration: none;
     color: var(--fg);
+}
+
+/* Logo image */
+/* adjust logo size here */
+.workspace-logo {
+    height: clamp(40px, 6vh, 60px);
+    width: auto;
+    border-radius: 16px;
+    box-shadow: 0 0 0 rgba(139,231,255,0);
+    transition: 0.25s ease;
+}
+
+/* Title text */
+.workspace-title {
+    font-size: clamp(18px, 2.2vw, 24px);
+    font-weight: 600;
+}
+
+/* Logo hover: bounce + underglow */
+.logo-link:hover .workspace-logo {
+    transform: translateY(-4px);
+    box-shadow: 0 0 24px rgba(139,231,255,0.7);
 }
 
 /* Navigation buttons */
 .workspace-nav {
     display: flex;
     align-items: center;
-    gap: clamp(8px, 1vw, 16px);
+    gap: clamp(8px, 1vw, 16px); /* adjust spacing between action buttons */
 }
 
 .ws-btn {
@@ -424,7 +448,8 @@ body {
 
 .ws-btn:hover {
     border-color: var(--accent);
-    color: var(--accent);
+    /* keep text white on hover */
+    color: var(--fg);
     box-shadow: 0 0 12px rgba(139,231,255,0.35);
     transform: translateY(-2px);
 }
@@ -506,7 +531,7 @@ body {
 
     .workspace-nav {
         position: absolute;
-        top: clamp(48px, 7vh, 64px);
+        top: clamp(56px, 8vh, 72px);
         left: 0;
         width: 100%;
         background: var(--glass);

@@ -146,6 +146,40 @@
     width: 100%;
 }
 
+/* New folder row */
+.new-folder-row {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    max-width: 420px; /* adjust width of input+button row here */
+}
+
+/* New folder input styling */
+#newFolderName {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 10px 14px;
+    color: var(--fg);
+    transition: 0.25s ease;
+}
+
+#newFolderName:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 16px rgba(139,231,255,0.35);
+    transform: translateY(-1px);
+}
+
+/* Make dashboard primary button inline, not full width */
+.dashboard .btn-primary {
+    width: auto;
+    padding: 10px 18px;
+    margin-top: 0;
+}
+
 /* Mobile */
 @media(max-width: 900px){
     .sidebar {
@@ -161,17 +195,23 @@
 <body>
 
 <!-- ===============================
-     WORKSPACE HEADER (NEW)
+     WORKSPACE HEADER
 =============================== -->
 <header class="workspace-header">
 
     <div class="workspace-left">
-        <div class="logo">Modernity Vault</div>
+        <!-- Logo + title wrapper -->
+        <a href="index.html" class="logo-link">
+            <!-- adjust logo size via .workspace-logo in main.css -->
+            <img src="assets/svg/favicon.svg" alt="Modernity logo" class="workspace-logo">
+            <!-- adjust spacing between logo and title via .workspace-title in main.css -->
+            <span class="workspace-title">Modernity Vault</span>
+        </a>
 
         <button class="hamburger" id="hamburgerBtn">☰</button>
 
         <nav class="workspace-nav" id="workspaceNav">
-            <a href="index.html" class="ws-btn">🏠 Home</a>
+            <!-- Action buttons (no Home) -->
             <button class="ws-btn">⬆️ Upload</button>
             <button class="ws-btn">📁 New Folder</button>
             <button class="ws-btn">🔗 Share</button>
@@ -206,8 +246,8 @@
 <div class="file-grid" id="grid"></div>
 
 <!-- Folder / File Creation -->
-<div style="margin-top:20px;">
-    <input type="text" id="newFolderName" placeholder="New Folder Name" style="padding:8px;border-radius:6px;"/>
+<div class="new-folder-row">
+    <input type="text" id="newFolderName" placeholder="New Folder Name" />
     <button class="btn-primary" onclick="createFolder()">Create Folder</button>
 </div>
 
