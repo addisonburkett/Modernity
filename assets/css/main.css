@@ -604,6 +604,105 @@ body {
     transform: translateY(-1px);
 }
 
+/* ===============================
+   SIDEBAR NEW FOLDER CONTROL
+=============================== */
+
+.sidebar-new-folder {
+    margin-top: 20px;
+}
+
+/* Trigger button (collapsed state) */
+.sidebar-new-folder-trigger {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--glass-border);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    color: var(--fg);
+    backdrop-filter: blur(10px);
+}
+
+.sidebar-new-folder-trigger:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(139,231,255,0.35);
+    transform: translateY(-2px);
+}
+
+/* Hidden form */
+.sidebar-new-folder-form {
+    margin-top: 10px;
+    display: none; /* toggled open */
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Input matches main input styling */
+.sidebar-new-folder-form input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: var(--fg);
+    transition: 0.25s ease;
+}
+
+.sidebar-new-folder-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(139,231,255,0.35);
+    transform: translateY(-1px);
+}
+
+/* Action buttons */
+.sidebar-new-folder-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* HEADER LAYOUT: two columns */
+.workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: clamp(56px, 8vh, 72px);
+    background: var(--glass);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    padding: 0 clamp(20px, 3vw, 40px);
+}
+
+/* LEFT COLUMN */
+.header-left {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centers logo + title */
+    width: clamp(180px, 20vw, 280px); /* EXACT width of sidebar */
+}
+
+/* Logo + title centered inside left column */
+.logo-title-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.5vw, 18px);
+    margin: 0 auto; /* ensures centering */
+}
+
+/* RIGHT COLUMN */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 40px);
+}
+
+/* Buttons left-aligned inside right column */
+.workspace-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 16px);
+}
+
 /* ==============================
    FOOTER
 ============================== */

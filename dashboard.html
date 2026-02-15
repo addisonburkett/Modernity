@@ -215,33 +215,31 @@
 =============================== -->
 <header class="workspace-header">
 
-    <div class="workspace-left">
+    <!-- LEFT COLUMN -->
+    <div class="header-left">
+        <div class="logo-title-group">
+            <img src="assets/svg/favicon.svg" class="workspace-logo">
+            <span class="workspace-title">Modernity Vault</span>
+        </div>
+    </div>
 
-        <!-- LOGO ONLY is clickable -->
-        <a href="index.html" class="logo-link">
-            <img src="assets/svg/favicon.svg" alt="Modernity logo" class="workspace-logo">
-        </a>
-
-        <!-- TITLE is NOT clickable -->
-        <span class="workspace-title">Modernity Vault</span>
-
-        <button class="hamburger" id="hamburgerBtn">☰</button>
-
-        <nav class="workspace-nav" id="workspaceNav">
+    <!-- RIGHT COLUMN -->
+    <div class="header-right">
+        <nav class="workspace-nav">
             <button class="ws-btn">⬆️ Upload</button>
             <button class="ws-btn">📁 New Folder</button>
             <button class="ws-btn">🔗 Share</button>
             <button class="ws-btn">⚙️ Preferences</button>
             <button class="ws-btn">❓ Help</button>
         </nav>
-    </div>
 
-    <div class="avatar-wrapper">
-        <div class="avatar" id="avatarBtn">👤</div>
-        <div class="avatar-menu" id="avatarMenu">
-            <button>Profile</button>
-            <button>Account Settings</button>
-            <button>Sign Out</button>
+        <div class="avatar-wrapper">
+            <div class="avatar" id="avatarBtn">👤</div>
+            <div class="avatar-menu" id="avatarMenu">
+                <button>Profile</button>
+                <button>Account Settings</button>
+                <button>Sign Out</button>
+            </div>
         </div>
     </div>
 
@@ -252,29 +250,25 @@
 <aside class="sidebar">
     <h3>Navigation</h3>
 
+
+    <p class="folder" onclick="navigateToFolder('root')">📁 Home</p>
     <p class="folder" onclick="navigateToFolder('documents')">📁 Documents</p>
     <p class="folder" onclick="navigateToFolder('pictures')">📁 Pictures</p>
-    <p class="folder" onclick="navigateToFolder('root')">📁 Home</p>
 
-    <!-- New Folder input/button stays under the folder list -->
-    <div class="sidebar-new-folder">
-        <input type="text" id="sidebarNewFolderName" placeholder="New Folder" />
-        <button class="ws-btn" onclick="createFolderFromSidebar()">Create</button>
+<!-- Collapsible New Folder Control -->
+<div class="sidebar-new-folder">
+    <div class="sidebar-new-folder-trigger" onclick="toggleSidebarFolderForm()">
+        New Folder
     </div>
-</aside>
 
-<main class="main-content">
-
-<div class="breadcrumb" id="breadcrumb"></div>
-<div class="file-grid" id="grid"></div>
-
-<!-- Folder / File Creation -->
-<div class="new-folder-row">
-    <input type="text" id="newFolderName" placeholder="New Folder Name" />
-    <button class="btn-primary" onclick="createFolder()">Create Folder</button>
-</div>
-
-</main>
+    <div class="sidebar-new-folder-form" id="sidebarFolderForm">
+        <input type="text" id="sidebarNewFolderName" placeholder="New Folder Name">
+        
+        <div class="sidebar-new-folder-actions">
+            <button class="ws-btn" onclick="cancelSidebarFolder()">Cancel</button>
+            <button class="ws-btn" onclick="createFolderFromSidebar()">Create</button>
+        </div>
+    </div>
 </div>
 
 <!-- Context Menu -->
