@@ -701,13 +701,12 @@ body {
 .actions-col {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
 }
 
 .title-col {
     display: flex;
     align-items: center;
-    padding-left: 40px;
 }
 
 /* Logo + title centered inside left column */
