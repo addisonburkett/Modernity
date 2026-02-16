@@ -244,6 +244,32 @@ body {
 }
 
 /* ======================
+   FLOATING MENU BUTTON
+====================== */
+
+.menu-floating {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+}
+
+.menu-btn {
+    backdrop-filter: blur(18px);
+}
+
+/* Push it slightly right when sidebar is pinned */
+.sidebar.pinned ~ .menu-floating {
+    left: 280px;
+}
+
+/* Smooth movement */
+.menu-floating {
+    transition: left 0.25s ease;
+}
+
+
+/* ======================
    FILE AREA
 ====================== */
 
