@@ -186,6 +186,19 @@ body {
 }
 
 /* ======================
+   PIN ACTIVE STATE
+====================== */
+
+#pinSidebar {
+    transition: transform 0.25s ease;
+}
+
+#pinSidebar.active {
+    transform: rotate(45deg);
+}
+
+
+/* ======================
    ICONS
 ====================== */
 
@@ -244,28 +257,55 @@ body {
 }
 
 /* ======================
-   FLOATING MENU BUTTON
+   TOPBAR LEFT
 ====================== */
 
-.menu-floating {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1100;
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
-.menu-btn {
-    backdrop-filter: blur(18px);
+/* ======================
+   MENU DROPDOWN
+====================== */
+
+.menu-wrapper {
+    position: relative;
 }
 
-/* Push it slightly right when sidebar is pinned */
-.sidebar.pinned ~ .menu-floating {
-    left: 280px;
+.menu-dropdown {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    min-width: 160px;
+    z-index: 1000;
 }
 
-/* Smooth movement */
-.menu-floating {
-    transition: left 0.25s ease;
+.menu-dropdown.open {
+    display: flex;
+}
+
+.dropdown-item {
+    background: transparent;
+    border: none;
+    color: var(--fg);
+    padding: 10px 12px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(139,231,255,0.12);
 }
 
 

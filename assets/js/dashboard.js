@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const sidebar = document.getElementById("sidebar");
-    const collapseBtn = document.getElementById("collapseBtn");
+    const pinBtn = document.getElementById("pinSidebar");
+    const menuBtn = document.getElementById("menuBtn");
+    const menuDropdown = document.getElementById("menuDropdown");
     const themeToggle = document.getElementById("themeToggle");
     const gridBtn = document.getElementById("gridView");
     const listBtn = document.getElementById("listView");
@@ -11,9 +13,41 @@ document.addEventListener("DOMContentLoaded", () => {
        Sidebar Pin Toggle
     ====================== */
 
-    collapseBtn.onclick = () => {
+    pinBtn.onclick = () => {
         sidebar.classList.toggle("pinned");
+        pinBtn.classList.toggle("active");
     };
+
+    /* Restore pinned state */
+    if (localStorage.getItem("sidebarPinned") === "true") {
+        sidebar.classList.add("pinned");
+        pinBtn.classList.add("active");
+    }
+
+    pinBtn.onclick = () => {
+        sidebar.classList.toggle("pinned");
+        pinBtn.classList.toggle("active");
+
+        localStorage.setItem(
+            "sidebarPinned",
+            sidebar.classList.contains("pinned")
+        );
+    };
+
+
+
+    /* ======================
+       Menu Dropdown
+    ====================== */
+
+    menuBtn.onclick = (e) => {
+        e.stopPropagation();
+        menuDropdown.classList.toggle("open");
+    };
+
+    document.addEventListener("click", () => {
+        menuDropdown.classList.remove("open");
+    });
 
     /* ======================
        Expandable Library
@@ -45,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
     gridBtn.onclick = () => {
         fileArea.classList.remove("list-view");
         fileArea.classList.add("grid-view");
-
         gridBtn.classList.add("active");
         listBtn.classList.remove("active");
     };
@@ -53,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
     listBtn.onclick = () => {
         fileArea.classList.remove("grid-view");
         fileArea.classList.add("list-view");
-
         listBtn.classList.add("active");
         gridBtn.classList.remove("active");
     };

@@ -78,31 +78,39 @@
 
     </aside>
 
-<!-- FLOATING MENU BUTTON -->
-        <div class="tooltip menu-floating">
-            <button id="collapseBtn" class="icon-btn menu-btn">
-                <img src="assets/svg/menu.svg" class="icon">
-            </button>
-            <span class="tooltiptext">Menu</span>
-        </div>
+
 
 
     <!-- MAIN -->
     <main class="main">
 
         <!-- TOPBAR -->
-        <div class="topbar">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs">
-                Dashboard / Home
-            </div>
+<div class="topbar">
 
-            <!-- Search -->
-            <div class="search-container tooltip">
-                <img src="assets/svg/search.svg" class="search-icon">
-                <input type="text" placeholder="Search files...">
-                <span class="tooltiptext">Search files</span>
+    <!-- LEFT SIDE -->
+    <div class="topbar-left">
+
+        <!-- MENU DROPDOWN -->
+        <div class="menu-wrapper">
+            <button id="menuBtn" class="icon-btn">
+                <img src="assets/svg/menu.svg" class="icon">
+            </button>
+
+            <div class="menu-dropdown" id="menuDropdown">
+                <button class="dropdown-item">New Folder</button>
+                <button class="dropdown-item">Upload File</button>
+                <button class="dropdown-item">Settings</button>
+                <button class="dropdown-item">Help</button>
             </div>
+        </div>
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            Dashboard / Home
+        </div>
+
+    </div>
+
 
             <!-- View toggle -->
             <div class="view-toggle">
