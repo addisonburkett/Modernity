@@ -44,7 +44,7 @@ body {
     display: flex;
     flex-direction: column;
     transition: width 0.25s ease;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /* Hover expand */
@@ -62,7 +62,7 @@ body {
 .sidebar:not(.pinned):not(:hover) .logo-text {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-6px);
+    transform: none;
     transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
@@ -162,7 +162,7 @@ body {
 
 .sidebar-footer {
     margin-top: auto;          /* pushes it to bottom */
-    padding: 14px 12px;
+    padding: 12px 8px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,8 +202,9 @@ body {
 
 /* Match pin icon size to footer icons */
 #pinSidebar .icon {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
 }
 
 .icon-btn:hover,
@@ -300,7 +301,7 @@ body {
 .sidebar:not(.pinned):not(:hover) #pinSidebar {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-6px);
+    transform: none;
 }
 
 /* When sidebar is collapsed, show tooltips to the right for nav items */
@@ -309,6 +310,14 @@ body {
     left: 100%;
     bottom: 50%;
     transform: translateX(12px) translateY(50%);
+}
+
+.sidebar:not(.pinned):not(:hover) .pin-wrapper {
+    display: none;
+}
+
+.sidebar:not(.pinned):not(:hover) #themeToggle {
+    display: none;
 }
 
 /* ======================
