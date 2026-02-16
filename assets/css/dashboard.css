@@ -222,6 +222,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px 40px;
+    gap: 20px;
 }
 
 .search-container {
@@ -264,6 +265,12 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
+    flex: 1;
+    min-width: 0;
+}
+
+.breadcrumbs {
+    white-space: nowrap;
 }
 
 /* ======================
@@ -272,6 +279,7 @@ body {
 
 .menu-wrapper {
     position: relative;
+    flex-shrink: 0;
 }
 
 .menu-dropdown {
