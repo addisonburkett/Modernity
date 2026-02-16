@@ -2,10 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sidebar = document.getElementById("sidebar");
     const collapseBtn = document.getElementById("collapseBtn");
+    const themeToggle = document.getElementById("themeToggle");
+    const gridBtn = document.getElementById("gridView");
+    const listBtn = document.getElementById("listView");
+    const fileArea = document.getElementById("fileArea");
+
+    /* ======================
+       Sidebar Pin Toggle
+    ====================== */
 
     collapseBtn.onclick = () => {
-        sidebar.classList.toggle("collapsed");
+        sidebar.classList.toggle("pinned");
     };
+
+    /* ======================
+       Expandable Library
+    ====================== */
 
     document.querySelectorAll(".nav-expand").forEach(btn => {
         btn.onclick = () => {
@@ -13,25 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     });
 
-    const themeToggle = document.getElementById("themeToggle");
+    /* ======================
+       Theme Toggle
+    ====================== */
 
     themeToggle.onclick = () => {
         const html = document.documentElement;
         const current = html.getAttribute("data-theme");
-
         html.setAttribute(
             "data-theme",
             current === "dark" ? "light" : "dark"
         );
     };
 
-    const fileArea = document.getElementById("fileArea");
-    const gridBtn = document.getElementById("gridView");
-    const listBtn = document.getElementById("listView");
+    /* ======================
+       Grid / List Toggle
+    ====================== */
 
     gridBtn.onclick = () => {
         fileArea.classList.remove("list-view");
         fileArea.classList.add("grid-view");
+
         gridBtn.classList.add("active");
         listBtn.classList.remove("active");
     };
@@ -39,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     listBtn.onclick = () => {
         fileArea.classList.remove("grid-view");
         fileArea.classList.add("list-view");
+
         listBtn.classList.add("active");
         gridBtn.classList.remove("active");
     };
