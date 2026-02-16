@@ -2,10 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>About  |  Modernity</title>
+    <title>About — Modernity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="assets/svg/favicon.svg">
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="assets/js/main.js" defer></script>
+
+    <style>
+        /* Glass Stats Panel */
+        .stats-panel {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2.4rem;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            opacity: 0.75;
+            font-size: 0.95rem;
+        }
+
+        /* FAQ Accordion */
+        .faq {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            padding: 18px 22px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 22px;
+            opacity: 0;
+            transition: all 0.35s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 18px 22px;
+            opacity: 1;
+        }
+
+        .faq-item.active .faq-question {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+    </style>
 </head>
 
 <body>
@@ -20,46 +100,173 @@
         <nav class="nav">
             <a href="index.html">Home</a>
             <a href="login.html">Login</a>
+            <a href="dashboard.html">Dashboard</a>
             <a href="about.html" class="active">About</a>
-
         </nav>
     </div>
 </header>
 
-<main class="container">
+<main>
 
-    <section class="hero">
-        <h1>About Modernity</h1>
-        <p>A digital environment shaped by intention, clarity, and geometric harmony.</p>
+    <!-- HERO -->
+    <section class="hero hero-intro">
+        <div class="container">
+            <h1>Where Clarity Meets Cloud</h1>
+            <p>
+                Modernity is more than a storage platform — it is a philosophy of
+                digital calm, intentional structure, and beautifully engineered
+                data experiences.
+            </p>
+        </div>
     </section>
 
-    <section class="widgets">
-
-        <div class="widget">
-            <h2>Our Vision</h2>
-            <p>
-                Modernity imagines a world where personal digital spaces feel crafted rather than assembled.
-                Every surface, shape, and transition is designed to evoke calm, focus, and a sense of
-                optimistic futurism.
+    <!-- PURPOSE -->
+    <section class="section reveal">
+        <div class="container">
+            <h2 class="section-title">Our Purpose</h2>
+            <p style="max-width: 800px; margin: 0 auto; text-align:center; opacity:0.8;">
+                Modernity was created to challenge the noise and fragmentation of
+                traditional cloud systems. Instead of overwhelming dashboards and
+                cluttered interfaces, we focus on clarity, precision, and a sense
+                of calm control over your digital world.
             </p>
         </div>
+    </section>
 
-        <div class="widget">
-            <h2>Design Language</h2>
-            <p>
-                The interface blends soft gradients, glass‑like layers, and precise geometric silhouettes.
-                SVG shapes form the backbone of the system, ensuring crisp visuals on any device.
+    <!-- GLASS PANEL STATS -->
+    <section class="section reveal">
+        <div class="container">
+            <h2 class="section-title">Modernity at a Glance</h2>
+
+            <div class="stats-panel">
+                <div class="stat">
+                    <h3>99.9%</h3>
+                    <p>Uptime Reliability</p>
+                </div>
+                <div class="stat">
+                    <h3>2.1ms</h3>
+                    <p>Average Query Speed</p>
+                </div>
+                <div class="stat">
+                    <h3>∞</h3>
+                    <p>Scalability Potential</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES GRID -->
+    <section class="section reveal">
+        <div class="container">
+            <h2 class="section-title">What We Stand For</h2>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3>Intentional Design</h3>
+                    <p>
+                        Every interaction, animation, and layout is crafted to
+                        reduce friction and elevate focus.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Trust & Transparency</h3>
+                    <p>
+                        Your data deserves respect. Modernity is built on
+                        principles of privacy, clarity, and user empowerment.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Future‑Ready Architecture</h3>
+                    <p>
+                        A modular foundation ensures Modernity grows with your
+                        needs — not the other way around.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISION -->
+    <section class="section reveal">
+        <div class="container">
+            <h2 class="section-title">Our Vision</h2>
+
+            <p style="max-width: 800px; margin: 0 auto; text-align:center; opacity:0.8;">
+                We imagine a cloud environment where users feel empowered, not
+                overwhelmed. A place where data is organized, accessible, and
+                beautifully presented. Modernity aims to become the digital
+                workspace for creators, thinkers, and teams who value elegance
+                and intentionality.
+            </p>
+
+            <p style="max-width: 800px; margin: 40px auto 0; text-align:center; opacity:0.8;">
+                As we expand, Modernity will introduce collaborative spaces,
+                real‑time editing, secure sharing, and intelligent organization —
+                all while preserving the calm, glass‑smooth aesthetic that defines
+                our identity.
             </p>
         </div>
+    </section>
 
-        <div class="widget">
-            <h2>Philosophy</h2>
-            <p>
-                Modernity values transparency, minimalism, and the beauty of intentional design.
-                It is a space where function and form coexist without compromise.
-            </p>
+    <!-- FAQ ACCORDION -->
+    <section class="section reveal">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq">
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What makes Modernity different?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Modernity focuses on clarity and intentional design,
+                        avoiding the clutter and noise found in traditional cloud
+                        dashboards. Every interaction is crafted to feel smooth,
+                        calm, and purposeful.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will Modernity support collaboration?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes — Modernity is built on a modular foundation that
+                        will expand into real‑time collaboration, shared spaces,
+                        and team‑oriented workflows.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my data secure?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. Modernity is designed with privacy and
+                        transparency at its core. Your data remains yours, always.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will Modernity remain free?
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Modernity will offer a generous free tier, with optional
+                        premium features for advanced workflows and expanded
+                        storage.
+                    </div>
+                </div>
+
+            </div>
         </div>
-
     </section>
 
 </main>
@@ -67,6 +274,44 @@
 <footer>
     Modernity © 2026 — Crafted with intention
 </footer>
+
+<script>
+    /* Reveal Animation */
+    const reveals = document.querySelectorAll(".reveal");
+
+    function checkReveals() {
+        const windowHeight = window.innerHeight;
+
+        reveals.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) {
+                el.classList.add("active");
+            }
+        });
+    }
+
+    window.addEventListener("load", () => {
+        setTimeout(() => {
+            if (reveals[0]) reveals[0].classList.add("active");
+        }, 1600);
+
+        setTimeout(() => {
+            if (reveals[1]) reveals[1].classList.add("active");
+        }, 3200);
+
+        checkReveals();
+    });
+
+    window.addEventListener("scroll", checkReveals);
+
+    /* FAQ Accordion */
+    document.querySelectorAll(".faq-question").forEach(q => {
+        q.addEventListener("click", () => {
+            const item = q.parentElement;
+            item.classList.toggle("active");
+        });
+    });
+</script>
 
 </body>
 </html>
