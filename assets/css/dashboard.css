@@ -1,18 +1,13 @@
-/* =========================
+/* ======================
    THEME VARIABLES
-========================= */
+====================== */
 
 :root {
-    --bg-dark: #0f0f1a;
+    --bg: #0f0f1a;
     --bg-light: #f5f7fa;
-    --fg-dark: #e6e6f0;
+    --fg: #e6e6f0;
     --fg-light: #1a1a1a;
     --accent: #8BE7FF;
-}
-
-html[data-theme="dark"] {
-    --bg: var(--bg-dark);
-    --fg: var(--fg-dark);
 }
 
 html[data-theme="light"] {
@@ -27,23 +22,23 @@ body {
     color: var(--fg);
 }
 
-/* =========================
+/* ======================
    LAYOUT
-========================= */
+====================== */
 
 .dashboard {
     display: flex;
     height: 100vh;
 }
 
-/* =========================
+/* ======================
    SIDEBAR
-========================= */
+====================== */
 
 .sidebar {
     width: 260px;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(20px);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(18px);
     border-right: 1px solid rgba(255,255,255,0.1);
     display: flex;
     flex-direction: column;
@@ -54,28 +49,48 @@ body {
     width: 80px;
 }
 
+.sidebar.collapsed .label,
+.sidebar.collapsed .logo-text {
+    display: none;
+}
+
 .sidebar-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px;
 }
 
-.nav-group {
-    margin-bottom: 10px;
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--fg);
 }
 
-.nav-expand,
-.nav-item {
+.logo-icon {
+    width: 28px;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 10px;
+}
+
+.nav-item,
+.nav-expand {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background: none;
+    gap: 14px;
+    padding: 12px 16px;
     border: none;
+    background: transparent;
     color: var(--fg);
+    border-radius: 12px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 .nav-item:hover,
@@ -83,35 +98,71 @@ body {
     background: rgba(139,231,255,0.1);
 }
 
-.nav-children {
+.nav-item.active {
+    background: rgba(139,231,255,0.15);
+    box-shadow: 0 0 15px rgba(139,231,255,0.3);
+}
+
+.nav-group .nav-children {
     display: none;
-    flex-direction: column;
+    margin-left: 15px;
 }
 
 .nav-group.open .nav-children {
-    display: flex;
+    display: block;
+}
+
+.chevron {
+    transition: transform 0.3s ease;
+}
+
+.nav-group.open .chevron {
+    transform: rotate(90deg);
 }
 
 .sidebar-footer {
-    margin-top: auto;
     padding: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-/* =========================
-   MAIN AREA
-========================= */
+.icon-btn,
+.toggle-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.icon-btn:hover,
+.toggle-btn:hover {
+    box-shadow: 0 0 12px rgba(139,231,255,0.4);
+}
+
+.toggle-btn.active {
+    box-shadow: 0 0 12px rgba(139,231,255,0.4);
+}
+
+/* ======================
+   ICONS
+====================== */
+
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* ======================
+   TOPBAR
+====================== */
 
 .main {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
-/* =========================
-   TOPBAR
-========================= */
 
 .topbar {
     display: flex;
@@ -125,8 +176,8 @@ body {
 }
 
 .search-container input {
-    padding: 10px 14px 10px 36px;
-    border-radius: 10px;
+    padding: 8px 12px 8px 34px;
+    border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.05);
     color: var(--fg);
@@ -137,11 +188,12 @@ body {
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
+    width: 16px;
 }
 
-/* =========================
+/* ======================
    FILE AREA
-========================= */
+====================== */
 
 .file-area {
     padding: 30px 40px;
