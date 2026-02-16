@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const gridBtn = document.getElementById("gridView");
     const listBtn = document.getElementById("listView");
     const fileArea = document.getElementById("fileArea");
+    const logoutBtn = document.getElementById("logoutBtn");
 
     /* ======================
        Restore pinned state
@@ -22,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
        Sidebar Pin Toggle
     ====================== */
 
-    pinBtn.addEventListener("click", () => {
+    pinBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
         sidebar.classList.toggle("pinned");
         pinBtn.classList.toggle("active");
 
@@ -38,11 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     menuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        menuDropdown.classList.toggle("open");
+        const open = menuDropdown.classList.toggle("open");
+        menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        menuDropdown.setAttribute("aria-hidden", open ? "false" : "true");
     });
 
     document.addEventListener("click", () => {
         menuDropdown.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuDropdown.setAttribute("aria-hidden", "true");
     });
 
     /* ======================
@@ -50,7 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ====================== */
 
     document.querySelectorAll(".nav-expand").forEach(btn => {
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
             btn.parentElement.classList.toggle("open");
         });
     });
@@ -77,6 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
         fileArea.classList.add("grid-view");
         gridBtn.classList.add("active");
         listBtn.classList.remove("active");
+        gridBtn.setAttribute("aria-pressed", "true");
+        listBtn.setAttribute("aria-pressed", "false");
     });
 
     listBtn.addEventListener("click", () => {
@@ -84,6 +93,19 @@ document.addEventListener("DOMContentLoaded", () => {
         fileArea.classList.add("list-view");
         listBtn.classList.add("active");
         gridBtn.classList.remove("active");
+        listBtn.setAttribute("aria-pressed", "true");
+        gridBtn.setAttribute("aria-pressed", "false");
     });
+
+    /* ======================
+       Logout (placeholder)
+    ====================== */
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            // Placeholder: replace with your logout logic
+            console.log("Logout clicked");
+        });
+    }
 
 });

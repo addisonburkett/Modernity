@@ -8,6 +8,7 @@
     --fg: #e6e6f0;
     --fg-light: #1a1a1a;
     --accent: #8BE7FF;
+    --accent-strong: #baf2ff;
 }
 
 html[data-theme="light"] {
@@ -61,15 +62,17 @@ body {
 .sidebar:not(.pinned):not(:hover) .logo-text {
     opacity: 0;
     pointer-events: none;
+    transform: translateX(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
 }
 
 /* Header */
 
 .sidebar-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 18px 16px;
+    gap: 12px;
 }
 
 .logo-link {
@@ -82,11 +85,13 @@ body {
 
 .logo-icon {
     width: 32px;
+    height: 32px;
 }
 
-.header-buttons {
-    display: flex;
-    gap: 8px; /* space between pin & collapse buttons */
+.logo-text {
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
 }
 
 /* Navigation */
@@ -94,6 +99,7 @@ body {
 .sidebar-nav {
     flex: 1;
     padding: 10px;
+    overflow: auto;
 }
 
 .nav-item,
@@ -109,16 +115,16 @@ body {
     color: var(--fg);
     border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease;
 }
 
-/* Hover */
 .nav-item:hover,
 .nav-expand:hover {
-    background: rgba(139,231,255,0.1);
+    background: rgba(139,231,255,0.06);
+    transform: translateY(-2px);
 }
 
-/* Active (clean, no glow) */
+/* Active */
 .nav-item.active {
     background: rgba(139,231,255,0.12);
     color: var(--accent);
@@ -127,7 +133,7 @@ body {
 .nav-item.active::before {
     content: "";
     position: absolute;
-    left: 6px;
+    left: 8px;
     width: 4px;
     height: 60%;
     border-radius: 4px;
@@ -138,7 +144,8 @@ body {
 
 .nav-group .nav-children {
     display: none;
-    margin-left: 15px;
+    margin-left: 12px;
+    margin-top: 6px;
 }
 
 .nav-group.open .nav-children {
@@ -148,42 +155,64 @@ body {
 /* Chevron rotate */
 
 .chevron {
-    transition: transform 0.3s ease;
-}
-
-.nav-group.open .chevron {
-    transform: rotate(90deg);
+    transition: transform 0.28s ease;
 }
 
 /* Footer */
 
 .sidebar-footer {
     margin-top: auto;          /* pushes it to bottom */
-    padding: 20px;
+    padding: 14px 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Footer controls stack vertically when expanded, horizontally when collapsed */
+.footer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+}
+
+/* When collapsed, keep icons centered in a single column but tighter */
+.sidebar:not(.pinned):not(:hover) .footer-controls {
+    gap: 10px;
 }
 
 /* Buttons */
 
 .icon-btn,
 .toggle-btn {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     padding: 8px;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon-btn:hover,
 .toggle-btn:hover {
-    background: rgba(139,231,255,0.12);
+    background: rgba(139,231,255,0.08);
+    transform: translateY(-2px);
 }
 
 .toggle-btn.active {
-    background: rgba(139,231,255,0.15);
+    background: rgba(139,231,255,0.14);
     border-color: var(--accent);
+}
+
+/* Footer specific button sizing */
+.footer-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
 }
 
 /* ======================
@@ -198,7 +227,6 @@ body {
     transform: rotate(45deg);
 }
 
-
 /* ======================
    ICONS
 ====================== */
@@ -206,6 +234,64 @@ body {
 .icon {
     width: 18px;
     height: 18px;
+    display: block;
+}
+
+/* Slightly larger icons for footer controls */
+.footer-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Ensure nav icons don't shrink */
+.nav-item .icon,
+.nav-expand .icon {
+    flex-shrink: 0;
+}
+
+/* ======================
+   TOOLTIP ADJUSTMENTS
+====================== */
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text (hidden by default) */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: max-content;
+    background-color: rgba(20,20,20,0.95);
+    color: #fff;
+    text-align: center;
+    padding: 6px 8px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+/* Show tooltip on hover */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-6px);
+}
+
+/* When sidebar is collapsed, show tooltips to the right for nav items */
+.sidebar:not(.pinned):not(:hover) .nav-item .tooltiptext,
+.sidebar:not(.pinned):not(:hover) .nav-expand .tooltiptext {
+    left: 100%;
+    bottom: 50%;
+    transform: translateX(12px) translateY(50%);
 }
 
 /* ======================
@@ -224,31 +310,6 @@ body {
     justify-content: space-between;
     padding: 20px 40px;
     gap: 20px;
-}
-
-.search-container {
-    position: relative;
-}
-
-.search-container input {
-    padding: 8px 12px 8px 34px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: var(--fg);
-    outline: none;
-}
-
-.search-container input:focus {
-    border-color: var(--accent);
-}
-
-.search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
 }
 
 /* View toggle layout */
@@ -316,7 +377,6 @@ body {
 .dropdown-item:hover {
     background: rgba(139,231,255,0.12);
 }
-
 
 /* ======================
    FILE AREA
