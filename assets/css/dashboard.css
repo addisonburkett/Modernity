@@ -175,6 +175,41 @@ body {
     display: none !important;
 }
 
+/* ============================================================
+   FIXED ICON COLUMN — TRUE CENTERING IN BOTH STATES
+   ============================================================ */
+
+/* Turn nav items into a 2‑column grid */
+.nav-item,
+.nav-expand {
+    display: grid !important;
+    grid-template-columns: 44px 1fr; /* fixed icon column */
+    align-items: center;
+}
+
+/* Center the icon inside its fixed column */
+.nav-item .icon,
+.nav-expand .icon {
+    justify-self: center;
+}
+
+/* Collapsed: switch to a single centered column */
+.sidebar:not(.pinned):not(:hover) .nav-item,
+.sidebar:not(.pinned):not(:hover) .nav-expand {
+    grid-template-columns: 1fr !important;
+}
+
+/* Collapsed: center icon perfectly */
+.sidebar:not(.pinned):not(:hover) .nav-item .icon,
+.sidebar:not(.pinned):not(:hover) .nav-expand .icon {
+    justify-self: center !important;
+}
+
+/* Collapsed: remove chevron entirely */
+.sidebar:not(.pinned):not(:hover) .chevron {
+    display: none !important;
+}
+
 /* ======================
    FOOTER
 ====================== */
