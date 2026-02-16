@@ -55,25 +55,28 @@
         <div class="sidebar-footer">
             <div class="footer-controls">
 
+                <!-- Logout (always visible) -->
                 <div class="tooltip">
-                    <button id="themeToggle" class="icon-btn footer-btn" aria-label="Toggle theme">
-                        <img src="assets/svg/moon.svg" class="icon footer-icon" alt="Toggle theme">
+                    <button id="logoutBtn" class="icon-btn footer-btn">
+                        <img src="assets/svg/logout.svg" class="icon footer-icon">
+                    </button>
+                    <span class="tooltiptext">Log Out</span>
+                </div>
+
+                <!-- Theme toggle -->
+                <div class="tooltip">
+                    <button id="themeToggle" class="icon-btn footer-btn">
+                        <img src="assets/svg/moon.svg" class="icon footer-icon">
                     </button>
                     <span class="tooltiptext">Toggle Theme</span>
                 </div>
 
-                <div class="tooltip">
-                    <button id="pinSidebar" class="icon-btn footer-btn" aria-label="Pin sidebar">
-                        <img src="assets/svg/pin.svg" class="icon footer-icon" alt="Pin sidebar">
+                <!-- Pin (floats right when expanded) -->
+                <div class="tooltip pin-wrapper">
+                    <button id="pinSidebar" class="icon-btn footer-btn">
+                        <img src="assets/svg/pin.svg" class="icon footer-icon">
                     </button>
                     <span class="tooltiptext">Pin Sidebar</span>
-                </div>
-
-                <div class="tooltip">
-                    <button id="logoutBtn" class="icon-btn footer-btn" aria-label="Log out">
-                        <img src="assets/svg/logout.svg" class="icon footer-icon" alt="Log out">
-                    </button>
-                    <span class="tooltiptext">Log Out</span>
                 </div>
 
             </div>

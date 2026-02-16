@@ -171,10 +171,13 @@ body {
 /* Footer controls stack vertically when expanded, horizontally when collapsed */
 .footer-controls {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
     width: 100%;
     align-items: center;
+    gap: 12px;
+}
+
+.pin-wrapper {
+    margin-left: auto; /* pushes pin to the right */
 }
 
 /* When collapsed, keep icons centered in a single column but tighter */
@@ -195,6 +198,12 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Match pin icon size to footer icons */
+#pinSidebar .icon {
+    width: 20px;
+    height: 20px;
 }
 
 .icon-btn:hover,
@@ -284,6 +293,14 @@ body {
     visibility: visible;
     opacity: 1;
     transform: translateX(-50%) translateY(-6px);
+}
+
+/* Hide theme + pin when collapsed */
+.sidebar:not(.pinned):not(:hover) #themeToggle,
+.sidebar:not(.pinned):not(:hover) #pinSidebar {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-6px);
 }
 
 /* When sidebar is collapsed, show tooltips to the right for nav items */
