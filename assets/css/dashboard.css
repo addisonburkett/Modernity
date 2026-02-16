@@ -206,6 +206,51 @@ body {
     display: none !important;
 }
 
+/* --- TRUE CENTERING FOR COLLAPSED SIDEBAR --- */
+
+/* Remove padding + gap so the icon can center */
+.sidebar:not(.pinned):not(:hover) .nav-item,
+.sidebar:not(.pinned):not(:hover) .nav-expand {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    gap: 0 !important;
+}
+
+/* Hide chevron so it doesn't reserve space */
+.sidebar:not(.pinned):not(:hover) .chevron {
+    display: none !important;
+}
+
+/* Force the icon itself to center inside the button */
+.sidebar:not(.pinned):not(:hover) .nav-item .icon,
+.sidebar:not(.pinned):not(:hover) .nav-expand .icon {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    display: block !important;
+}
+
+/* --- CENTER LOGO WHEN SIDEBAR IS COLLAPSED --- */
+
+.sidebar:not(.pinned):not(:hover) .sidebar-header {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.sidebar:not(.pinned):not(:hover) .logo-link {
+    justify-content: center !important;
+    gap: 0 !important;
+}
+
+.sidebar:not(.pinned):not(:hover) .logo-icon {
+    margin: 0 auto !important;
+}
+
+.sidebar:not(.pinned):not(:hover) .logo-text {
+    display: none !important; /* fully remove layout space */
+}
+
 /* Buttons */
 
 .icon-btn,
