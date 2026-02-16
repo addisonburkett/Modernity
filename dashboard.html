@@ -1,470 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard  |  Modernity</title>
+    <meta charset="UTF-8">
+    <title>Dashboard | Modernity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="assets/svg/favicon.svg">
-<link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 
-<style>
-/* ===============================
-   DASHBOARD SPECIFIC STYLING
-=============================== */
-
-.dashboard {
-    display: flex;
-    min-height: 100vh;
-    padding-top: clamp(56px, 8vh, 72px);
-}
-
-/* Sidebar */
-.sidebar {
-    width: clamp(180px, 20vw, 280px);
-    background: var(--glass);
-    border-right: 1px solid var(--glass-border);
-    backdrop-filter: blur(16px);
-    padding: 30px 20px;
-    transition: 0.3s ease;
-}
-
-.sidebar h3 {
-    margin-bottom: 10px;
-}
-
-/* Accessibility bubble under Navigation */
-.sidebar-tip {
-    font-size: 12px;
-    opacity: 0.65;
-    margin-bottom: 18px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--glass-border);
-    padding: 8px 10px;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-}
-
-.sidebar p.folder {
-    cursor: pointer;
-    margin: 8px 0;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: clamp(14px, 1.2vw, 16px);
-    transition: 0.25s ease;
-}
-
-.sidebar p.folder:hover {
-    background: rgba(139,231,255,0.1);
-    color: var(--fg);
-}
-
-/* Main content */
-.main-content {
-    flex: 1;
-    padding: clamp(20px, 4vw, 60px);
-}
-
-/* Breadcrumb */
-.breadcrumb {
-    margin-bottom: 20px;
-    font-size: clamp(12px, 1vw, 14px);
-    opacity: 0.7;
-}
-
-.breadcrumb span {
-    cursor: pointer;
-}
-
-/* File grid */
-.file-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(140px, 18vw, 180px), 1fr));
-    gap: clamp(12px, 1.5vw, 20px);
-}
-
-.file-card {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 18px;
-    padding: clamp(12px, 2vw, 20px);
-    backdrop-filter: blur(12px);
-    transition: 0.25s ease;
-    box-shadow: 0 0 8px rgba(139,231,255,0.12);
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.4s ease forwards;
-}
-
-.file-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--accent);
-    box-shadow: 0 0 22px rgba(139,231,255,0.45);
-}
-
-.file-icon {
-    font-size: clamp(24px, 4vw, 28px);
-    margin-bottom: 8px;
-}
-
-.file-name {
-    font-size: clamp(12px, 1vw, 14px);
-    word-break: break-word;
-}
-
-/* Context menu */
-.context-menu {
-    position: fixed;
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(12px);
-    border-radius: 12px;
-    padding: 10px 0;
-    display: none;
-    z-index: 2000;
-}
-
-.context-menu button {
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 10px 20px;
-    text-align: left;
-    color: var(--fg);
-    cursor: pointer;
-}
-
-.context-menu button:hover {
-    background: rgba(139,231,255,0.1);
-}
-
-/* Preview modal */
-.preview-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 3000;
-    padding: 12px;
-}
-
-.preview-modal {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    padding: clamp(20px, 4vw, 30px);
-    border-radius: 18px;
-    backdrop-filter: blur(16px);
-    max-width: 400px;
-    width: 100%;
-}
-
-/* New folder row */
-.new-folder-row {
-    margin-top: 20px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    max-width: 420px; /* adjust width of input+button row here */
-}
-
-/* New folder input styling */
-#newFolderName {
-    flex: 1;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--glass-border);
-    border-radius: 14px;
-    padding: 10px 14px;
-    color: var(--fg);
-    transition: 0.25s ease;
-}
-
-#newFolderName:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 16px rgba(139,231,255,0.35);
-    transform: translateY(-1px);
-}
-
-/* Make dashboard primary button inline, not full width */
-.dashboard .btn-primary {
-    width: auto;
-    padding: 10px 18px;
-    margin-top: 0;
-}
-
-/* Mobile */
-@media(max-width: 900px){
-    .sidebar {
-        display: none;
-    }
-    .file-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-}
-</style>
+    <script defer src="assets/js/dashboard.js"></script>
 </head>
-
 <body>
-
-<!-- ===============================
-     WORKSPACE HEADER
-=============================== -->
-<header class="workspace-header">
-
-    <!-- COLUMN 1: LOGO ONLY -->
-    <div class="logo-col">
-        <img src="assets/svg/favicon.svg" class="workspace-logo">
-    </div>
-
-    <!-- COLUMN 2: TITLE -->
-    <div class="logo-col">
-        <a href="index.html" class="logo-link">
-            <title="Cloud Vault"></title>
-        </a>
-    </div>
-
-    <!-- COLUMN 3: BUTTONS + AVATAR -->
-    <div class="actions-col">
-        <nav class="workspace-nav">
-            <button class="ws-btn small">⬆️ Upload</button>
-            <button class="ws-btn small">📁 New Folder</button>
-            <button class="ws-btn small">🔗 Share</button>
-            <button class="ws-btn small">⚙️ Preferences</button>
-            <button class="ws-btn small">❓ Help</button>
-        </nav>
-
-        <div class="avatar-wrapper">
-            <div class="avatar" id="avatarBtn">👤</div>
-            <div class="avatar-menu" id="avatarMenu">
-                <button>Profile</button>
-                <button>Account Settings</button>
-                <button>Sign Out</button>
-            </div>
-        </div>
-    </div>
-
-</header>
 
 <div class="dashboard">
 
-<aside class="sidebar">
-    <h3>Navigation</h3><br><br>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
 
-
-    <p class="folder" onclick="navigateToFolder('root')">📁 Home</p>
-    <p class="folder" onclick="navigateToFolder('documents')">📁 Documents</p>
-    <p class="folder" onclick="navigateToFolder('pictures')">📁 Pictures</p>
-
-<!-- Collapsible New Folder Control -->
-<div class="sidebar-new-folder">
-    <div class="sidebar-new-folder-trigger" onclick="toggleSidebarFolderForm()">
-        New Folder
-    </div>
-
-    <div class="sidebar-new-folder-form" id="sidebarFolderForm">
-        <input type="text" id="sidebarNewFolderName" placeholder="New Folder Name">
-        
-        <div class="sidebar-new-folder-actions">
-            <button class="ws-btn" onclick="cancelSidebarFolder()">Cancel</button>
-            <button class="ws-btn" onclick="createFolderFromSidebar()">Create</button>
+        <div class="sidebar-header">
+            <span class="logo-text">Modernity</span>
+            <button id="collapseBtn" aria-label="Collapse Sidebar">☰</button>
         </div>
-    </div>
+
+        <nav class="nav">
+
+            <div class="nav-group">
+                <button class="nav-item active">
+                    <img src="assets/svg/home.svg" alt="">
+                    <span>Home</span>
+                </button>
+            </div>
+
+            <div class="nav-group">
+                <button class="nav-expand">
+                    <img src="assets/svg/chevron.svg" class="chevron" alt="">
+                    <span>Library</span>
+                </button>
+
+                <div class="nav-children">
+                    <button class="nav-item">
+                        <img src="assets/svg/documents.svg" alt="">
+                        <span>Documents</span>
+                    </button>
+
+                    <button class="nav-item">
+                        <img src="assets/svg/pictures.svg" alt="">
+                        <span>Pictures</span>
+                    </button>
+                </div>
+            </div>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="themeToggle" aria-label="Toggle Theme">
+                <img src="assets/svg/moon.svg" alt="">
+            </button>
+
+            <button id="logoutBtn">
+                <img src="assets/svg/logout.svg" alt="">
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+
+            <div class="breadcrumbs">
+                Home / Workspace
+            </div>
+
+            <div class="search-container">
+                <img src="assets/svg/search.svg" class="search-icon" alt="">
+                <input type="text" id="searchInput" placeholder="Search files..." aria-label="Search">
+            </div>
+
+            <div class="view-toggle">
+                <button id="gridView" class="active">Grid</button>
+                <button id="listView">List</button>
+            </div>
+
+        </div>
+
+        <!-- FILE AREA -->
+        <div class="file-area grid-view" id="fileArea">
+            <!-- Mock cards -->
+        </div>
+
+    </main>
+
 </div>
-
-<!-- Context Menu -->
-<div class="context-menu" id="contextMenu">
-<button id="previewBtn">Preview</button>
-<button id="deleteBtn">Delete</button>
-</div>
-
-<!-- Preview Modal -->
-<div class="preview-overlay" id="previewOverlay">
-<div class="preview-modal">
-<h3 id="previewTitle"></h3>
-<p>File preview placeholder.</p>
-<button class="btn-primary" onclick="closePreview()">Close</button>
-</div>
-</div>
-
-<script>
-/* ===============================
-   DATA LAYER (Firebase-ready)
-=============================== */
-const DataLayer = (function(){
-
-    let structure = {
-        root: {
-            id: "root",
-            name: "root",
-            type: "folder",
-            children: [
-                { id:"documents", name:"Documents", type:"folder", children:[
-                    { id:"doc1", name:"Resume.pdf", type:"file" }
-                ]},
-                { id:"pictures", name:"Pictures", type:"folder", children:[
-                    { id:"pic1", name:"Vacation.png", type:"file" }
-                ]},
-            ]
-        }
-    };
-
-    function findFolder(path){
-        let current = structure.root;
-        for(let id of path){
-            current = current.children.find(c => c.id === id);
-        }
-        return current;
-    }
-
-    return {
-        getFiles(path){
-            return findFolder(path).children;
-        },
-        createFolder(path, name){
-            findFolder(path).children.push({
-                id: Date.now().toString(),
-                name,
-                type:"folder",
-                children:[]
-            });
-        },
-        deleteItem(path, id){
-            const folder = findFolder(path);
-            folder.children = folder.children.filter(c => c.id !== id);
-        }
-    }
-
-})();
-
-/* ===============================
-   UI LOGIC
-=============================== */
-
-let currentPath = [];
-let selectedItem = null;
-
-const grid = document.getElementById("grid");
-const breadcrumb = document.getElementById("breadcrumb");
-const contextMenu = document.getElementById("contextMenu");
-
-function render(){
-    grid.innerHTML = "";
-    const files = DataLayer.getFiles(currentPath);
-
-    files.forEach(file => {
-        const card = document.createElement("div");
-        card.className = "file-card";
-        const icon = file.type === "folder" ? "📁" : "📄";
-        card.innerHTML = `
-            <div class="file-icon">${icon}</div>
-            <div class="file-name">${file.name}</div>
-        `;
-
-        card.onclick = () => {
-            if(file.type === "folder"){
-                currentPath.push(file.id);
-                render();
-            }
-        };
-
-        card.oncontextmenu = (e) => {
-            e.preventDefault();
-            selectedItem = file;
-            contextMenu.style.display = "block";
-            contextMenu.style.left = e.pageX + "px";
-            contextMenu.style.top = e.pageY + "px";
-        };
-
-        grid.appendChild(card);
-    });
-
-    renderBreadcrumb();
-}
-
-function renderBreadcrumb(){
-    breadcrumb.innerHTML = `<span onclick="goHome()">Home</span>`;
-    let pathSoFar = [];
-    currentPath.forEach((id,index)=>{
-        pathSoFar.push(id);
-        const folder = DataLayer.getFiles(currentPath.slice(0,index)).find(f => f.id === id);
-        breadcrumb.innerHTML += " / ";
-        breadcrumb.innerHTML += `<span onclick="goTo(${index})">${folder ? folder.name : "Folder"}</span>`;
-    });
-}
-
-function goHome(){
-    currentPath = [];
-    render();
-}
-
-function goTo(index){
-    currentPath = currentPath.slice(0,index+1);
-    render();
-}
-
-function navigateToFolder(id){
-    currentPath = id === "root" ? [] : [id];
-    render();
-}
-
-/* Context Actions */
-document.getElementById("deleteBtn").onclick = () => {
-    if(selectedItem){
-        DataLayer.deleteItem(currentPath, selectedItem.id);
-        contextMenu.style.display = "none";
-        render();
-    }
-};
-
-document.getElementById("previewBtn").onclick = () => {
-    if(selectedItem){
-        document.getElementById("previewTitle").innerText = selectedItem.name;
-        document.getElementById("previewOverlay").style.display = "flex";
-        contextMenu.style.display = "none";
-    }
-};
-
-document.addEventListener("click", () => {
-    contextMenu.style.display = "none";
-});
-
-function closePreview(){
-    document.getElementById("previewOverlay").style.display = "none";
-}
-
-/* Dynamic folder creation */
-function createFolder(){
-    const folderName = document.getElementById("newFolderName").value.trim();
-    if(folderName){
-        DataLayer.createFolder(currentPath, folderName);
-        document.getElementById("newFolderName").value = "";
-        render();
-    }
-}
-
-/* ===============================
-   HEADER INTERACTIONS
-=============================== */
-
-const avatarBtn = document.getElementById("avatarBtn");
-const avatarMenu = document.getElementById("avatarMenu");
-const hamburgerBtn = document.getElementById("hamburgerBtn");
-const workspaceNav = document.getElementById("workspaceNav");
-
-avatarBtn.onclick = () => {
-    avatarMenu.classList.toggle("open");
-};
-
-hamburgerBtn.onclick = () => {
-    workspaceNav.classList.toggle("open");
-};
-
-render();
-</script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 <svg viewBox="0 0 24 24" class="icon">
   <circle cx="12" cy="12" r="8" stroke="#8BE7FF" stroke-width="1.6" fill="none"/>
   <path d="M10.5 9a1.8 1.8 0 0 1 3.2 1.1c0 1.2-1.2 1.6-1.8 2.1-.4.3-.6.7-.6 1.3"
-        fill="none" stroke="#8BE7FF" stroke-width="1.6" stroke-linecap="round"/>
+        fill="none" stroke="#currentColor" stroke-width="1.6" stroke-linecap="round"/>
   <circle cx="12" cy="16.2" r="0.7" fill="#8BE7FF"/>
 </svg>

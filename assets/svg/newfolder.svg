@@ -2,5 +2,5 @@
   <path d="M4 7h6l2 2h8v9H4z"
         fill="none" stroke="#8BE7FF" stroke-width="1.6" stroke-linejoin="round"/>
   <path d="M12 11v4M10 13h4"
-        fill="none" stroke="#8BE7FF" stroke-width="1.6" stroke-linecap="round"/>
+        fill="none" stroke="#currentColor" stroke-width="1.6" stroke-linecap="round"/>
 </svg>

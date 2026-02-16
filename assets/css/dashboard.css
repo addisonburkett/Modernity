@@ -1,0 +1,158 @@
+/* =========================
+   THEME VARIABLES
+========================= */
+
+:root {
+    --bg-dark: #0f0f1a;
+    --bg-light: #f5f7fa;
+    --fg-dark: #e6e6f0;
+    --fg-light: #1a1a1a;
+    --accent: #8BE7FF;
+}
+
+html[data-theme="dark"] {
+    --bg: var(--bg-dark);
+    --fg: var(--fg-dark);
+}
+
+html[data-theme="light"] {
+    --bg: var(--bg-light);
+    --fg: var(--fg-light);
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 260px;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.nav-group {
+    margin-bottom: 10px;
+}
+
+.nav-expand,
+.nav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: var(--fg);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-item:hover,
+.nav-expand:hover {
+    background: rgba(139,231,255,0.1);
+}
+
+.nav-children {
+    display: none;
+    flex-direction: column;
+}
+
+.nav-group.open .nav-children {
+    display: flex;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* =========================
+   MAIN AREA
+========================= */
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container input {
+    padding: 10px 14px 10px 36px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: var(--fg);
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* =========================
+   FILE AREA
+========================= */
+
+.file-area {
+    padding: 30px 40px;
+    display: grid;
+    gap: 20px;
+}
+
+.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+}
+
+.list-view {
+    grid-template-columns: 1fr;
+}
