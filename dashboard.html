@@ -17,68 +17,72 @@
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
 
+        <!-- SIDEBAR HEADER -->
         <div class="sidebar-header">
+            <!-- Logo + Text -->
             <a href="index.html" class="logo-link">
                 <img src="assets/svg/favicon.svg" class="logo-icon">
                 <span class="logo-text">Modernity</span>
             </a>
 
-        <div class="tooltip">
-            <button id="pinSidebar" class="icon-btn">
-                <img src="assets/svg/pin.svg" class="icon">
-            </button>
-            <span class="tooltiptext">Pin sidebar</span>
+            <!-- Header buttons -->
+            <div class="header-buttons">
+                <div class="tooltip">
+                    <button id="pinSidebar" class="icon-btn">
+                        <img src="assets/svg/pin.svg" class="icon">
+                    </button>
+                    <span class="tooltiptext">Pin sidebar</span>
+                </div>
+
+                <div class="tooltip">
+                    <button id="collapseBtn" class="icon-btn">
+                        <img src="assets/svg/menu.svg" class="icon">
+                    </button>
+                    <span class="tooltiptext">Collapse sidebar</span>
+                </div>
+            </div>
         </div>
 
-
+        <!-- NAVIGATION -->
         <nav class="sidebar-nav">
-
             <button class="nav-item active">
                 <img src="assets/svg/home.svg" class="icon">
                 <span class="label">Home</span>
             </button>
 
             <div class="nav-group">
-
                 <button class="nav-expand">
                     <img src="assets/svg/chevron.svg" class="icon chevron">
                     <span class="label">Library</span>
                 </button>
-
                 <div class="nav-children">
-
                     <button class="nav-item">
                         <img src="assets/svg/documents.svg" class="icon">
                         <span class="label">Documents</span>
                     </button>
-
                     <button class="nav-item">
                         <img src="assets/svg/pictures.svg" class="icon">
                         <span class="label">Pictures</span>
                     </button>
-
                 </div>
-
             </div>
-
         </nav>
 
+        <!-- FOOTER BUTTONS -->
         <div class="sidebar-footer">
+            <div class="tooltip">
+                <button id="themeToggle" class="icon-btn">
+                    <img src="assets/svg/moon.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Toggle Theme</span>
+            </div>
 
-        <div class="tooltip">
-            <button id="themeToggle" class="icon-btn">
-                <img src="assets/svg/moon.svg" class="icon">
-            </button>
-            <span class="tooltiptext">Toggle Theme</span>
-        </div>
-
-        <div class="tooltip">
-            <button class="icon-btn">
-                <img src="assets/svg/logout.svg" class="icon">
-            </button>
-            <span class="tooltiptext">Log Out</span>
-        </div>
-
+            <div class="tooltip">
+                <button class="icon-btn">
+                    <img src="assets/svg/logout.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Log Out</span>
+            </div>
         </div>
 
     </aside>
@@ -86,42 +90,39 @@
     <!-- MAIN -->
     <main class="main">
 
-<div class="topbar">
+        <!-- TOPBAR -->
+        <div class="topbar">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                Dashboard / Home
+            </div>
 
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-        Dashboard / Home
-    </div>
+            <!-- Search -->
+            <div class="search-container tooltip">
+                <img src="assets/svg/search.svg" class="search-icon">
+                <input type="text" placeholder="Search files...">
+                <span class="tooltiptext">Search files</span>
+            </div>
 
-    <!-- Search -->
-    <div class="search-container tooltip">
-        <img src="assets/svg/search.svg" class="search-icon">
-        <input type="text" placeholder="Search files...">
-        <span class="tooltiptext">Search files</span>
-    </div>
+            <!-- View toggle -->
+            <div class="view-toggle">
+                <div class="tooltip">
+                    <button id="gridView" class="toggle-btn active">
+                        <img src="assets/svg/grid.svg" class="icon">
+                    </button>
+                    <span class="tooltiptext">Grid view</span>
+                </div>
 
-    <!-- View toggle -->
-    <div class="view-toggle">
-
-        <div class="tooltip">
-            <button id="gridView" class="toggle-btn active">
-                <img src="assets/svg/grid.svg" class="icon">
-            </button>
-            <span class="tooltiptext">Grid view</span>
+                <div class="tooltip">
+                    <button id="listView" class="toggle-btn">
+                        <img src="assets/svg/list.svg" class="icon">
+                    </button>
+                    <span class="tooltiptext">List view</span>
+                </div>
+            </div>
         </div>
 
-        <div class="tooltip">
-            <button id="listView" class="toggle-btn">
-                <img src="assets/svg/list.svg" class="icon">
-            </button>
-            <span class="tooltiptext">List view</span>
-        </div>
-
-    </div>
-
-</div>
-
-
+        <!-- FILE AREA -->
         <div id="fileArea" class="file-area grid-view"></div>
 
     </main>

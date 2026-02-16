@@ -81,7 +81,12 @@ body {
 }
 
 .logo-icon {
-    width: 28px;
+    width: 32px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 8px; /* space between pin & collapse buttons */
 }
 
 /* Navigation */
