@@ -331,6 +331,38 @@ body {
     text-shadow: 0 0 8px rgba(139,231,255,0.4);
 }
 
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: max-content;
+    background-color: #333;  /* dark background */
+    color: #fff;             /* white text */
+    text-align: center;
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;            /* above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+}
+
+/* Show tooltip on hover */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
 /* ==============================
    FOOTER
 ============================== */

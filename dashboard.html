@@ -24,7 +24,7 @@
             </a>
 
             <button id="collapseBtn" class="icon-btn">
-                <img src="assets/svg/menu.svg">
+                <img src="assets/svg/pin.svg">
             </button>
         </div>
 
@@ -77,30 +77,57 @@
     <!-- MAIN -->
     <main class="main">
 
-        <div class="topbar">
+<div class="topbar">
 
-            <div class="breadcrumbs">
-                Dashboard / Home
-            </div>
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        Dashboard / Home
+    </div>
 
-            <div class="search-container">
-                <img src="assets/svg/search.svg" class="search-icon">
-                <input type="text" placeholder="Search files...">
-            </div>
+    <!-- Search -->
+    <div class="search-container tooltip">
+        <img src="assets/svg/search.svg" class="search-icon">
+        <input type="text" placeholder="Search files...">
+        <span class="tooltiptext">Search files</span>
+    </div>
 
-            <div class="view-toggle">
+    <!-- View toggle -->
+    <div class="view-toggle">
 
-                <button id="gridView" class="toggle-btn active">
-                    <img src="assets/svg/grid.svg" class="icon">
-                </button>
-
-                <button id="listView" class="toggle-btn">
-                    <img src="assets/svg/list.svg" class="icon">
-                </button>
-
-            </div>
-
+        <div class="tooltip">
+            <button id="gridView" class="toggle-btn active">
+                <img src="assets/svg/grid.svg" class="icon">
+            </button>
+            <span class="tooltiptext">Grid view</span>
         </div>
+
+        <div class="tooltip">
+            <button id="listView" class="toggle-btn">
+                <img src="assets/svg/list.svg" class="icon">
+            </button>
+            <span class="tooltiptext">List view</span>
+        </div>
+
+    </div>
+
+    <!-- Sidebar pin button -->
+    <div class="tooltip">
+        <button id="pinSidebar" class="icon-btn">
+            <img src="assets/svg/pin.svg" class="icon">
+        </button>
+        <span class="tooltiptext">Pin sidebar</span>
+    </div>
+
+    <!-- Night mode toggle -->
+    <div class="tooltip">
+        <button id="themeToggle" class="icon-btn">
+            <img src="assets/svg/moon.svg" class="icon">
+        </button>
+        <span class="tooltiptext">Toggle dark/light mode</span>
+    </div>
+
+</div>
+
 
         <div id="fileArea" class="file-area grid-view"></div>
 
