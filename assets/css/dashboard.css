@@ -421,3 +421,7 @@ body {
 .list-view {
     grid-template-columns: 1fr;
 }
+
+.sidebar {
+    outline: 3px solid red !important;
+}
