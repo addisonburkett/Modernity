@@ -127,7 +127,7 @@ body {
 .nav-item.active::before {
     content: "";
     position: absolute;
-    left: 6px;
+    left: 0px;
     width: 4px;
     height: 60%;
     border-radius: 4px;
@@ -186,6 +186,26 @@ body {
 }
 
 /* ======================
+   COLLAPSED CENTER FIX
+====================== */
+
+.sidebar:not(.pinned):not(:hover) .nav-item,
+.sidebar:not(.pinned):not(:hover) .nav-expand {
+    justify-content: center;
+    padding: 12px 0;          /* remove horizontal padding */
+}
+
+.sidebar:not(.pinned):not(:hover) .sidebar-header {
+    justify-content: center;
+}
+
+.sidebar:not(.pinned):not(:hover) .sidebar-footer {
+    justify-content: center;
+    gap: 12px;
+}
+
+
+/* ======================
    PIN ACTIVE STATE
 ====================== */
 
@@ -203,8 +223,8 @@ body {
 ====================== */
 
 .icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 }
 
 /* ======================
