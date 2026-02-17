@@ -311,3 +311,53 @@ body {
     opacity: 1;
     transform: translateY(0) scale(1);
 }
+
+/* ======================
+   PIN BUTTON
+====================== */
+
+#pinSidebar {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+
+    transition: transform 0.25s ease, 
+                background 0.2s ease, 
+                border 0.2s ease,
+                box-shadow 0.2s ease;
+
+    transform: rotate(45deg); /* Initial tilted state */
+}
+
+/* Icon stays upright relative to button */
+#pinSidebar .icon {
+    width: 20px;
+    height: 20px;
+    transform: rotate(-45deg);
+    transition: transform 0.25s ease;
+}
+
+/* Hover effect */
+#pinSidebar:hover {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* PINNED STATE */
+#pinSidebar.active {
+    transform: rotate(-45deg); /* Box rotates opposite */
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Keep icon pointing upright visually when pinned */
+#pinSidebar.active .icon {
+    transform: rotate(45deg);
+}
