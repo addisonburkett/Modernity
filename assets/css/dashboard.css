@@ -493,3 +493,44 @@ body {
 .list-view {
     grid-template-columns: 1fr;
 }
+
+/* ============================================================
+   UNIVERSAL FIXED ICON COLUMN — NAV + FOOTER
+   ============================================================ */
+
+/* Turn ALL sidebar buttons into a 44px icon column + label column */
+.nav-item,
+.nav-expand,
+.footer-btn {
+    display: grid !important;
+    grid-template-columns: 44px 1fr !important;
+    align-items: center !important;
+    justify-items: center !important;
+}
+
+/* Center the icon inside the fixed column */
+.nav-item .icon,
+.nav-expand .icon,
+.footer-btn .icon {
+    justify-self: center !important;
+    margin: 0 !important;
+}
+
+/* Collapsed: switch to a single centered column */
+.sidebar:not(.pinned):not(:hover) .nav-item,
+.sidebar:not(.pinned):not(:hover) .nav-expand,
+.sidebar:not(.pinned):not(:hover) .footer-btn {
+    grid-template-columns: 1fr !important;
+}
+
+/* Collapsed: center icons perfectly */
+.sidebar:not(.pinned):not(:hover) .nav-item .icon,
+.sidebar:not(.pinned):not(:hover) .nav-expand .icon,
+.sidebar:not(.pinned):not(:hover) .footer-btn .icon {
+    justify-self: center !important;
+}
+
+/* Remove chevron in collapsed mode */
+.sidebar:not(.pinned):not(:hover) .chevron {
+    display: none !important;
+}
