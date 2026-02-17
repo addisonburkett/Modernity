@@ -78,7 +78,6 @@
 
     </aside>
 
-
     <!-- MAIN -->
     <main class="main">
 
@@ -87,8 +86,7 @@
 
             <!-- LEFT SIDE -->
             <div class="topbar-left">
-
-                <!-- MENU BUTTON WITH TOOLTIP -->
+                <!-- Menu button -->
                 <div class="tooltip">
                     <button id="menuBtn" class="icon-btn">
                         <img src="assets/svg/menu.svg" class="icon">
@@ -99,31 +97,30 @@
                 <div class="breadcrumbs">
                     Dashboard / Home
                 </div>
-
             </div>
 
-            <!-- CENTER SEARCH (NEW) -->
+            <!-- CENTER SEARCH -->
             <div class="topbar-search">
                 <input type="text" id="searchInput" placeholder="Search files..." />
             </div>
 
             <!-- RIGHT SIDE -->
-            <div class="view-toggle">
-
+            <div class="topbar-right">
+                <!-- Single Grid/List toggle button -->
                 <div class="tooltip">
-                    <button id="gridView" class="toggle-btn active">
-                        <img src="assets/svg/grid.svg" class="icon">
+                    <button id="viewToggle" class="icon-btn">
+                        <img id="viewIcon" src="assets/svg/grid.svg" class="icon">
                     </button>
-                    <span class="tooltiptext">Grid view</span>
+                    <span id="viewTooltip" class="tooltiptext">Grid view</span>
                 </div>
 
+                <!-- Profile button placeholder -->
                 <div class="tooltip">
-                    <button id="listView" class="toggle-btn">
-                        <img src="assets/svg/list.svg" class="icon">
+                    <button id="profileBtn" class="icon-btn">
+                        <img src="assets/svg/profile.svg" class="icon">
                     </button>
-                    <span class="tooltiptext">List view</span>
+                    <span class="tooltiptext">Profile</span>
                 </div>
-
             </div>
 
         </div>
