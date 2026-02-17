@@ -38,7 +38,7 @@ body {
 ====================== */
 
 .sidebar {
-    width: 72px;
+    width: 80px;
     background: linear-gradient(
         180deg,
         rgba(255,255,255,0.03),
@@ -386,4 +386,34 @@ body {
 
 .list-view {
     grid-template-columns: 1fr;
+}
+
+/* ======================
+   SMART TOOLTIP SYSTEM
+====================== */
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    position: fixed; /* key change */
+    background: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+
+    z-index: 2000;
+}
+
+.tooltip .tooltiptext.show {
+    opacity: 1;
+    transform: translateY(0);
 }
