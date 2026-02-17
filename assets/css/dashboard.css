@@ -45,8 +45,11 @@ body {
     flex-direction: column;
     transition: width 0.25s ease;
     overflow: hidden;
+
+    /* Glowing sidebar outline */
     outline: 2px solid var(--accent);
-    outline-offset: 1px;
+    outline-offset: 0;
+    box-shadow: 0 0 12px var(--accent);
 }
 
 /* Hover expand */
@@ -80,6 +83,19 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+}
+
+/* Glow divider below header */
+.sidebar-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    border-radius: 2px;
 }
 
 .logo-link {
@@ -176,6 +192,19 @@ body {
     justify-content: flex-start !important;
 }
 
+/* Glow divider above footer */
+.sidebar-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    border-radius: 2px;
+}
+
 /* Right-side footer button (theme toggle) */
 .sidebar-footer .right-footer-btn {
     margin-left: auto !important;
@@ -226,38 +255,25 @@ body {
 }
 
 /* ======================
-   PIN BUTTON — SUBTLE INTERACTION
+   PIN BUTTON — RESTORED ORIGINAL BEHAVIOR
 ====================== */
 
-/* Default: icon only */
+/* Restore original button behavior */
 #pinSidebar {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 6px;
-    border-radius: 10px;
-}
-
-/* Icon loads tilted */
-#pinSidebar .icon {
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
     transition: transform 0.25s ease;
-    display: block;
 }
 
-/* Hover + pinned: subtle inset button */
+/* Original clockwise rotation */
+#pinSidebar.active {
+    transform: rotate(45deg);
+}
+
+/* Add subtle hover/active indentation without changing behavior */
 #pinSidebar:hover,
 #pinSidebar.active {
-    background: rgba(255,255,255,0.06) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.35) !important;
-}
-
-/* Active: rotate icon counterclockwise */
-#pinSidebar.active .icon {
-    transform: rotate(-45deg);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.35);
 }
 
 /* ======================
