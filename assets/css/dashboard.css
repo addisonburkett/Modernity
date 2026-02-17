@@ -329,21 +329,22 @@ body {
     grid-template-columns: 1fr;
 }
 
-/* Footer layout: logout left, theme pinned right */
+/* --- FIX FOOTER BUTTON ALIGNMENT --- */
+/* Footer behaves like header: left button + right button */
 .sidebar-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 20px;
+    justify-content: flex-start !important; /* stop space-between */
 }
 
-/* Theme toggle pinned right */
-.theme-wrapper {
-    margin-left: auto;
+/* Right-side footer button (theme toggle) */
+.sidebar-footer .right-footer-btn {
+    margin-left: auto !important; /* pins it to the right */
 }
 
-/* Hide theme toggle when collapsed */
-.sidebar:not(.pinned):not(:hover) .theme-wrapper {
+/* Hide right-side button when collapsed */
+.sidebar:not(.pinned):not(:hover) .right-footer-btn {
     display: none !important;
 }
 
