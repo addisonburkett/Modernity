@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
-     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+     fill="none" stroke="#c0c0c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <!-- Thumbtack head -->
   <path d="M8 3h8v3l-2 2v4l3 3v1H7v-1l3-3V8L8 6z"/>
   <!-- Thumbtack point -->

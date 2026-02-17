@@ -5,10 +5,10 @@
 :root {
     --bg: #0f0f1a;
     --bg-light: #f5f7fa;
-    --bg-sidebar: #141421;
+    --bg-sidebar: #2b2b37;
     --fg: #e6e6f0;
     --fg-light: #1a1a1a;
-    --accent: #8BE7FF;
+    --accent: #8be7ff;
 }
 
 html[data-theme="light"] {
@@ -38,7 +38,7 @@ body {
 
 .sidebar {
     width: 72px;
-    background: var(vg --bg-sidebar);
+    background: var(--bg-sidebar);
     backdrop-filter: blur(18px);
     border-right: 1px solid rgba(255,255,255,0.08);
     display: flex;
@@ -71,7 +71,11 @@ body {
 ====================== */
 
 .sidebar-header {
-    background: var(--bg);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(18px);
+    position: relative;
+    z-index: 2;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -162,6 +166,10 @@ body {
 
 .sidebar-footer {
     background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(18px);
+    position: relative;
+    z-index: 2;
+
     display: flex;
     align-items: center;
     padding: 20px;
@@ -209,24 +217,47 @@ body {
 }
 
 /* ======================
-   PIN BUTTON
-====================== */
-
-#pinSidebar {
-    transition: transform 0.25s ease;
-}
-
-#pinSidebar.active {
-    transform: rotate(45deg);
-}
-
-/* ======================
    ICONS
 ====================== */
 
 .icon {
     width: 18px;
     height: 18px;
+}
+
+/* ======================
+   PIN BUTTON — SUBTLE INTERACTION
+====================== */
+
+/* Default: icon only */
+#pinSidebar {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 6px;
+    border-radius: 10px;
+}
+
+/* Icon loads tilted */
+#pinSidebar .icon {
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
+    display: block;
+}
+
+/* Hover + pinned: subtle inset button */
+#pinSidebar:hover,
+#pinSidebar.active {
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.35) !important;
+}
+
+/* Active: rotate icon counterclockwise */
+#pinSidebar.active .icon {
+    transform: rotate(-45deg);
 }
 
 /* ======================
@@ -345,39 +376,4 @@ body {
 
 .list-view {
     grid-template-columns: 1fr;
-}
-
-/* ======================
-   PIN BUTTON — SUBTLE INTERACTION
-====================== */
-
-/* Default: icon only */
-#pinSidebar {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 6px;
-    border-radius: 10px;
-}
-
-/* Icon loads tilted */
-#pinSidebar .icon {
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
-    transition: transform 0.25s ease;
-    display: block;
-}
-
-/* Hover + pinned: subtle inset button */
-#pinSidebar:hover,
-#pinSidebar.active {
-    background: rgba(255,255,255,0.06) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.35) !important;
-}
-
-/* Active: rotate icon counterclockwise */
-#pinSidebar.active .icon {
-    transform: rotate(-45deg);
 }
