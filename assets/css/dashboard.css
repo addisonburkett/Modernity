@@ -5,7 +5,7 @@
 :root {
     --bg: #0f0f1a;
     --bg-light: #f5f7fa;
-    --bg-sidebar: #2b2b37;
+    --bg-sidebar: #22222c;
     --fg: #e6e6f0;
     --fg-light: #1a1a1a;
     --accent: #8be7ff;
@@ -250,30 +250,43 @@ body {
 ====================== */
 
 .icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 }
 
 /* ======================
-   PIN BUTTON — RESTORED ORIGINAL BEHAVIOR
+   PIN BUTTON — SUBTLE INTERACTION
 ====================== */
 
-/* Restore original button behavior */
+/* Default: icon only */
 #pinSidebar {
-    transition: transform 0.25s ease;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 6px;
+    border-radius: 10px;
 }
 
-/* Original clockwise rotation */
-#pinSidebar.active {
+/* Icon loads tilted */
+#pinSidebar .icon {
+    width: 20px;
+    height: 20px;
     transform: rotate(45deg);
+    transition: transform 0.25s ease;
+    display: block;
 }
 
-/* Add subtle hover/active indentation without changing behavior */
+/* Hover + pinned: subtle inset button */
 #pinSidebar:hover,
 #pinSidebar.active {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.35);
+    background: rgba(255,255,255,0.06) !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.35) !important;
+}
+
+/* Active: rotate icon counterclockwise */
+#pinSidebar.active .icon {
+    transform: rotate(-45deg);
 }
 
 /* ======================
