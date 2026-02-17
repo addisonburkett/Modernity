@@ -8,67 +8,126 @@
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/dashboard.css">
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js"></script>
-
-    <script>
-    /* =========================
-       🔥 PASTE SAME FIREBASE CONFIG HERE
-    ========================= */
-
-    const firebaseConfig = {
-        apiKey: "PASTE_HERE",
-        authDomain: "PASTE_HERE",
-        projectId: "PASTE_HERE",
-        storageBucket: "PASTE_HERE",
-        messagingSenderId: "PASTE_HERE",
-        appId: "PASTE_HERE"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-
-    </script>
-
     <script defer src="assets/js/dashboard.js"></script>
 </head>
-
 <body>
 
 <div class="dashboard">
 
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
 
+        <!-- SIDEBAR HEADER -->
         <div class="sidebar-header">
             <a href="index.html" class="logo-link">
                 <img src="assets/svg/favicon.svg" class="logo-icon">
                 <span class="logo-text">Modernity</span>
             </a>
 
-            <button id="pinSidebar" class="icon-btn">
-                <img src="assets/svg/pin.svg" class="icon">
-            </button>
+            <div class="tooltip">
+                <button id="pinSidebar" class="icon-btn">
+                    <img src="assets/svg/pin.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Pin sidebar</span>
+            </div>
         </div>
 
-        <div class="sidebar-footer">
-            <button id="logoutBtn" class="icon-btn footer-btn">
-                <img src="assets/svg/logout.svg" class="icon">
+        <!-- NAVIGATION -->
+        <nav class="sidebar-nav">
+            <button class="nav-item active">
+                <img src="assets/svg/home.svg" class="icon">
+                <span class="label">Home</span>
             </button>
+
+            <div class="nav-group">
+                <button class="nav-expand">
+                    <img src="assets/svg/chevron.svg" class="icon chevron">
+                    <span class="label">Library</span>
+                </button>
+                <div class="nav-children">
+                    <button class="nav-item">
+                        <img src="assets/svg/documents.svg" class="icon">
+                        <span class="label">Documents</span>
+                    </button>
+                    <button class="nav-item">
+                        <img src="assets/svg/pictures.svg" class="icon">
+                        <span class="label">Pictures</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- FOOTER BUTTONS -->
+        <div class="sidebar-footer">
+
+            <div class="tooltip">
+                <button id="logoutBtn" class="icon-btn footer-btn">
+                    <img src="assets/svg/logout.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Log Out</span>
+            </div>
+
+            <div class="tooltip right-footer-btn">
+                <button id="themeToggle" class="icon-btn footer-btn">
+                    <img src="assets/svg/moon.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Toggle Theme</span>
+            </div>
+
         </div>
 
     </aside>
 
+    <!-- MAIN -->
     <main class="main">
+
+        <!-- TOPBAR -->
         <div class="topbar">
-            <div class="breadcrumbs">Dashboard / Home</div>
+
+            <!-- LEFT SIDE -->
+            <div class="topbar-left">
+                <!-- Menu button -->
+                <div class="tooltip">
+                    <button id="menuBtn" class="icon-btn">
+                        <img src="assets/svg/menu.svg" class="icon">
+                    </button>
+                    <span class="tooltiptext">Menu</span>
+                </div>
+
+                <div class="breadcrumbs">
+                    Dashboard / Home
+                </div>
+            </div>
+
+            <!-- CENTER SEARCH -->
+            <div class="topbar-search">
+                <input type="text" id="searchInput" placeholder="Search files..." />
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="topbar-right">
+                <!-- Single Grid/List toggle button -->
+                <div class="tooltip">
+                    <button id="viewToggle" class="icon-btn">
+                        <img id="viewIcon" src="assets/svg/grid.svg" class="icon">
+                    </button>
+                    <span id="viewTooltip" class="tooltiptext">Grid view</span>
+                </div>
+
+                <!-- Profile button placeholder -->
+                <div class="tooltip">
+                    <button id="profileBtn" class="icon-btn">
+                        <img src="assets/svg/profile.svg" class="icon">
+                    </button>
+                    <span class="tooltiptext">Profile</span>
+                </div>
+            </div>
+
         </div>
 
+        <!-- FILE AREA -->
         <div id="fileArea" class="file-area grid-view"></div>
+
     </main>
 
 </div>
