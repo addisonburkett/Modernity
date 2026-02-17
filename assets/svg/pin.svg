@@ -1,25 +1,7 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="16"
-  height="16"
-  viewBox="0 0 16 16"
->
-  <g
-    fill="none"
-    stroke="white"
-    stroke-width="1.2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <!-- Pin head -->
-    <path d="M5 3.5h6c.8 0 1.2.9.7 1.5L10.8 7H5.2L4.3 5C3.8 4.4 4.2 3.5 5 3.5Z" />
-    <!-- Neck -->
-    <path d="M7 7l-1 3" />
-    <!-- Body -->
-    <path d="M9 7l1 3" />
-    <!-- Stem -->
-    <path d="M8 10v3.5" />
-    <!-- Point -->
-    <path d="M8 13.5l-1 1" />
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+     fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Thumbtack head -->
+  <path d="M8 3h8v3l-2 2v4l3 3v1H7v-1l3-3V8L8 6z"/>
+  <!-- Thumbtack point -->
+  <path d="M12 15v6"/>
 </svg>
