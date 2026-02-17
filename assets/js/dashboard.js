@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const sidebar = document.getElementById("sidebar");
     const pinBtn = document.getElementById("pinSidebar");
     const menuBtn = document.getElementById("menuBtn");
@@ -10,34 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileArea = document.getElementById("fileArea");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    /* ======================
-       Restore pinned state
-    ====================== */
-
+    // Restore pinned state
     if (localStorage.getItem("sidebarPinned") === "true") {
         sidebar.classList.add("pinned");
         pinBtn.classList.add("active");
     }
 
-    /* ======================
-       Sidebar Pin Toggle
-    ====================== */
-
+    // Pin toggle
     pinBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         sidebar.classList.toggle("pinned");
         pinBtn.classList.toggle("active");
-
-        localStorage.setItem(
-            "sidebarPinned",
-            sidebar.classList.contains("pinned")
-        );
+        localStorage.setItem("sidebarPinned", sidebar.classList.contains("pinned"));
     });
 
-    /* ======================
-       Menu Dropdown ONLY
-    ====================== */
-
+    // Menu dropdown
     menuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const open = menuDropdown.classList.toggle("open");
@@ -51,10 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         menuDropdown.setAttribute("aria-hidden", "true");
     });
 
-    /* ======================
-       Expandable Library
-    ====================== */
-
+    // Expandable library nav
     document.querySelectorAll(".nav-expand").forEach(btn => {
         btn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -62,23 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* ======================
-       Theme Toggle
-    ====================== */
-
+    // Theme toggle
     themeToggle.addEventListener("click", () => {
         const html = document.documentElement;
-        const current = html.getAttribute("data-theme");
-        html.setAttribute(
-            "data-theme",
-            current === "dark" ? "light" : "dark"
-        );
+        html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
     });
 
-    /* ======================
-       Grid / List Toggle
-    ====================== */
-
+    // Grid/List toggle
     gridBtn.addEventListener("click", () => {
         fileArea.classList.remove("list-view");
         fileArea.classList.add("grid-view");
@@ -97,15 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
         gridBtn.setAttribute("aria-pressed", "false");
     });
 
-    /* ======================
-       Logout (placeholder)
-    ====================== */
-
+    // Logout (placeholder)
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
-            // Placeholder: replace with your logout logic
             console.log("Logout clicked");
         });
     }
-
 });
