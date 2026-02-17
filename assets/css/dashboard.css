@@ -343,3 +343,38 @@ body {
 .list-view {
     grid-template-columns: 1fr;
 }
+
+/* ======================
+   PIN BUTTON — SUBTLE INTERACTION
+====================== */
+
+/* Default: icon only, no button chrome */
+#pinSidebar {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 6px; /* keeps click target comfortable */
+    border-radius: 10px; /* matches your UI language */
+}
+
+/* Icon loads tilted */
+#pinSidebar .icon {
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    transition: transform 0.25s ease;
+    display: block;
+}
+
+/* Hover + pinned: subtle inset button */
+#pinSidebar:hover,
+#pinSidebar.active {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.35);
+}
+
+/* Active: rotate icon counterclockwise to vertical */
+#pinSidebar.active .icon {
+    transform: rotate(-45deg);
+}
