@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
        Sidebar Pin Toggle
     ====================== */
 
+    pinBtn.onclick = () => {
+        sidebar.classList.toggle("pinned");
+        pinBtn.classList.toggle("active");
+    };
+
     /* Restore pinned state */
     if (localStorage.getItem("sidebarPinned") === "true") {
         sidebar.classList.add("pinned");
