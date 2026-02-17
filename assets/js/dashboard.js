@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
        Sidebar Pin Toggle
     ====================== */
 
-    // Restore pinned state
     if (localStorage.getItem("sidebarPinned") === "true") {
         sidebar.classList.add("pinned");
         pinBtn.classList.add("active");
@@ -102,15 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let top = rect.top - tooltipRect.height - 8;
             let left = rect.left + rect.width / 2 - tooltipRect.width / 2;
 
-            // Prevent left overflow
             if (left < 8) left = 8;
-
-            // Prevent right overflow
             if (left + tooltipRect.width > window.innerWidth - 8) {
                 left = window.innerWidth - tooltipRect.width - 8;
             }
-
-            // If not enough space above, show below
             if (top < 8) {
                 top = rect.bottom + 8;
             }

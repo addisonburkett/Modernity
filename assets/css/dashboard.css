@@ -94,7 +94,7 @@ body {
 }
 
 .logo-icon {
-    width: 40px; /* was 32px */
+    width: 40px;
     height: 40px;
 }
 
@@ -196,12 +196,12 @@ body {
     width: 20px;
     height: 20px;
 }
+
 /* ======================
    BUTTONS
 ====================== */
 
-.icon-btn,
-.toggle-btn {
+.icon-btn {
     width: 36px;
     height: 36px;
 
@@ -209,7 +209,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    padding: 0; /* remove padding-based sizing */
+    padding: 0;
     box-sizing: border-box;
 
     background: rgba(255,255,255,0.04);
@@ -220,16 +220,34 @@ body {
     transition: background 0.2s ease, border 0.2s ease;
 }
 
-/* Hover */
-.icon-btn:hover,
-.toggle-btn:hover {
+.icon-btn:hover {
     background: rgba(255,255,255,0.08);
 }
 
-/* Active toggle state */
+.toggle-btn {
+    width: 36px;
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+    transition: background 0.2s ease, border 0.2s ease;
+}
+
+.toggle-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
 .toggle-btn.active {
     background: rgba(139,231,255,0.15);
-    border-color: var(--accent);
+    border: 1px solid var(--accent);
 }
 
 /* ======================
@@ -240,10 +258,9 @@ body {
     width: 20px;
     height: 20px;
 
-    display: block;     /* prevents inline baseline offset */
+    display: block;
     flex-shrink: 0;
 }
-
 
 /* ======================
    PIN BUTTON
@@ -266,10 +283,9 @@ body {
                 border 0.2s ease,
                 box-shadow 0.2s ease;
 
-    transform: rotate(45deg); /* Load tilted */
+    transform: rotate(45deg);
 }
 
-/* Icon stays upright relative to button */
 #pinSidebar .icon {
     width: 20px;
     height: 20px;
@@ -278,24 +294,20 @@ body {
     transition: transform 0.25s ease;
 }
 
-/* Hover subtle background */
 #pinSidebar:hover {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.12);
 }
 
-/* PINNED STATE */
 #pinSidebar.active {
-    transform: rotate(-45deg); /* Box rotates opposite */
+    transform: rotate(-45deg);
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.12);
 }
 
-/* Keep icon pointing DOWN visually when pinned */
 #pinSidebar.active .icon {
     transform: rotate(45deg);
 }
-
 
 /* ======================
    MAIN / TOPBAR
@@ -363,7 +375,6 @@ body {
 html[data-theme="light"] .topbar-search input {
     background: rgba(0,0,0,0.04);
 }
-
 
 /* ======================
    MENU DROPDOWN
