@@ -44,7 +44,7 @@ body {
     flex-direction: column;
     transition: width 0.25s ease;
     overflow: hidden;
-    outline: 2px solid --accent;
+    outline: 2px solid var(--accent);
     outline-offset: 1px;
 }
 
@@ -65,7 +65,9 @@ body {
     pointer-events: none;
 }
 
-/* Header */
+/* ======================
+   HEADER
+====================== */
 
 .sidebar-header {
     display: flex;
@@ -86,12 +88,9 @@ body {
     width: 32px;
 }
 
-.header-buttons {
-    display: flex;
-    gap: 8px; /* space between pin & collapse buttons */
-}
-
-/* Navigation */
+/* ======================
+   NAVIGATION
+====================== */
 
 .sidebar-nav {
     flex: 1;
@@ -120,7 +119,7 @@ body {
     background: rgba(139,231,255,0.1);
 }
 
-/* Active (clean, no glow) */
+/* Active */
 .nav-item.active {
     background: rgba(139,231,255,0.12);
     color: var(--accent);
@@ -137,7 +136,6 @@ body {
 }
 
 /* Nav group children */
-
 .nav-group .nav-children {
     display: none;
     margin-left: 15px;
@@ -148,7 +146,6 @@ body {
 }
 
 /* Chevron rotate */
-
 .chevron {
     transition: transform 0.3s ease;
 }
@@ -157,15 +154,36 @@ body {
     transform: rotate(90deg);
 }
 
-/* Footer */
+/* ======================
+   FOOTER
+====================== */
 
 .sidebar-footer {
-    padding: 20px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    justify-content: flex-start !important;
 }
 
-/* Buttons */
+/* Right-side footer button (theme toggle) */
+.sidebar-footer .right-footer-btn {
+    margin-left: auto !important;
+}
+
+/* Hide right-side button when collapsed */
+.sidebar:not(.pinned):not(:hover) .right-footer-btn {
+    display: none !important;
+}
+
+/* Footer icon sizing */
+.footer-btn .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ======================
+   BUTTONS
+====================== */
 
 .icon-btn,
 .toggle-btn {
@@ -188,7 +206,7 @@ body {
 }
 
 /* ======================
-   PIN ACTIVE STATE
+   PIN BUTTON
 ====================== */
 
 #pinSidebar {
@@ -198,7 +216,6 @@ body {
 #pinSidebar.active {
     transform: rotate(45deg);
 }
-
 
 /* ======================
    ICONS
@@ -251,8 +268,7 @@ body {
     width: 16px;
 }
 
-/* View toggle layout */
-
+/* View toggle */
 .view-toggle {
     display: flex;
     gap: 10px;
@@ -310,7 +326,6 @@ body {
     background: rgba(139,231,255,0.12);
 }
 
-
 /* ======================
    FILE AREA
 ====================== */
@@ -327,28 +342,4 @@ body {
 
 .list-view {
     grid-template-columns: 1fr;
-}
-
-/* --- FIX FOOTER BUTTON ALIGNMENT --- */
-/* Footer behaves like header: left button + right button */
-.sidebar-footer {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    justify-content: flex-start !important; /* stop space-between */
-}
-
-/* Right-side footer button (theme toggle) */
-.sidebar-footer .right-footer-btn {
-    margin-left: auto !important; /* pins it to the right */
-}
-
-/* Hide right-side button when collapsed */
-.sidebar:not(.pinned):not(:hover) .right-footer-btn {
-    display: none !important;
-}
-
-.footer-btn .icon {
-    width: 20px;
-    height: 20px;
 }
