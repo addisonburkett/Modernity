@@ -5,10 +5,11 @@
 :root {
     --bg: #0f0f1a;
     --bg-light: #f5f7fa;
-    --bg-sidebar: #22222c;
+    --bg-sidebar: #1c1c26;
     --fg: #e6e6f0;
     --fg-light: #1a1a1a;
     --accent: #8be7ff;
+    --divider: rgba(255,255,255,0.06);
 }
 
 html[data-theme="light"] {
@@ -38,18 +39,20 @@ body {
 
 .sidebar {
     width: 72px;
-    background: var(--bg-sidebar);
-    backdrop-filter: blur(18px);
-    border-right: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.03),
+        rgba(0,0,0,0.15)
+    ), var(--bg-sidebar);
+
+    border-right: 1px solid var(--divider);
     display: flex;
     flex-direction: column;
     transition: width 0.25s ease;
     overflow: hidden;
 
-    /* Glowing sidebar outline */
-    outline: 2px solid var(--accent);
-    outline-offset: 0;
-    box-shadow: 0 0 12px var(--accent);
+    /* subtle inner depth instead of glow */
+    box-shadow: inset -1px 0 0 rgba(255,255,255,0.04);
 }
 
 /* Hover expand */
@@ -74,28 +77,12 @@ body {
 ====================== */
 
 .sidebar-header {
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(18px);
-    position: relative;
-    z-index: 2;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-}
 
-/* Glow divider below header */
-.sidebar-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 12px;
-    right: 12px;
-    height: 3px;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-    border-radius: 2px;
+    border-bottom: 1px solid var(--divider);
 }
 
 .logo-link {
@@ -107,7 +94,8 @@ body {
 }
 
 .logo-icon {
-    width: 32px;
+    width: 40px; /* was 32px */
+    height: 40px;
 }
 
 /* ======================
@@ -116,7 +104,7 @@ body {
 
 .sidebar-nav {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
 }
 
 .nav-item,
@@ -138,7 +126,7 @@ body {
 /* Hover */
 .nav-item:hover,
 .nav-expand:hover {
-    background: rgba(139,231,255,0.1);
+    background: rgba(255,255,255,0.06);
 }
 
 /* Active */
@@ -147,20 +135,24 @@ body {
     color: var(--accent);
 }
 
+/* Subtle active indicator instead of glow bar */
 .nav-item.active::before {
     content: "";
     position: absolute;
-    left: 6px;
-    width: 4px;
+    left: 0;
+    top: 20%;
     height: 60%;
-    border-radius: 4px;
+    width: 3px;
+    border-radius: 3px;
     background: var(--accent);
 }
 
 /* Nav group children */
 .nav-group .nav-children {
     display: none;
-    margin-left: 15px;
+    margin-left: 14px;
+    padding-left: 10px;
+    border-left: 1px solid var(--divider);
 }
 
 .nav-group.open .nav-children {
@@ -181,38 +173,22 @@ body {
 ====================== */
 
 .sidebar-footer {
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(18px);
-    position: relative;
-    z-index: 2;
-
     display: flex;
     align-items: center;
-    padding: 20px;
-    justify-content: flex-start !important;
-}
+    padding: 18px 20px;
+    gap: 12px;
 
-/* Glow divider above footer */
-.sidebar-footer::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 12px;
-    right: 12px;
-    height: 3px;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
-    border-radius: 2px;
+    border-top: 1px solid var(--divider);
 }
 
 /* Right-side footer button (theme toggle) */
 .sidebar-footer .right-footer-btn {
-    margin-left: auto !important;
+    margin-left: auto;
 }
 
 /* Hide right-side button when collapsed */
 .sidebar:not(.pinned):not(:hover) .right-footer-btn {
-    display: none !important;
+    display: none;
 }
 
 /* Footer icon sizing */
@@ -227,17 +203,17 @@ body {
 
 .icon-btn,
 .toggle-btn {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 10px;
     padding: 8px;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .icon-btn:hover,
 .toggle-btn:hover {
-    background: rgba(139,231,255,0.12);
+    background: rgba(255,255,255,0.08);
 }
 
 .toggle-btn.active {
@@ -255,39 +231,56 @@ body {
 }
 
 /* ======================
-   PIN BUTTON — SUBTLE INTERACTION
+   PIN BUTTON
 ====================== */
 
-/* Default: icon only */
 #pinSidebar {
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 6px;
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
     border-radius: 10px;
+
+    transition: transform 0.25s ease, 
+                background 0.2s ease, 
+                border 0.2s ease,
+                box-shadow 0.2s ease;
+
+    transform: rotate(45deg); /* Load tilted */
 }
 
-/* Icon loads tilted */
+/* Icon stays upright relative to button */
 #pinSidebar .icon {
     width: 20px;
     height: 20px;
-    transform: rotate(45deg);
-    transition: transform 0.25s ease;
-    display: block;
-}
 
-/* Hover + pinned: subtle inset button */
-#pinSidebar:hover,
-#pinSidebar.active {
-    background: rgba(255,255,255,0.06) !important;
-    border: 1px solid rgba(255,255,255,0.12) !important;
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.35) !important;
-}
-
-/* Active: rotate icon counterclockwise */
-#pinSidebar.active .icon {
     transform: rotate(-45deg);
+    transition: transform 0.25s ease;
 }
+
+/* Hover subtle background */
+#pinSidebar:hover {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* PINNED STATE */
+#pinSidebar.active {
+    transform: rotate(-45deg); /* Box rotates opposite */
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Keep icon pointing DOWN visually when pinned */
+#pinSidebar.active .icon {
+    transform: rotate(45deg);
+}
+
 
 /* ======================
    MAIN / TOPBAR
@@ -306,32 +299,6 @@ body {
     padding: 20px 40px;
 }
 
-.search-container {
-    position: relative;
-}
-
-.search-container input {
-    padding: 8px 12px 8px 34px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.05);
-    color: var(--fg);
-    outline: none;
-}
-
-.search-container input:focus {
-    border-color: var(--accent);
-}
-
-.search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-}
-
-/* View toggle */
 .view-toggle {
     display: flex;
     gap: 10px;
@@ -359,9 +326,8 @@ body {
     position: absolute;
     top: 40px;
     left: 0;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.9);
+    border: 1px solid var(--divider);
     border-radius: 12px;
     padding: 8px;
     display: none;
@@ -386,7 +352,7 @@ body {
 }
 
 .dropdown-item:hover {
-    background: rgba(139,231,255,0.12);
+    background: rgba(255,255,255,0.06);
 }
 
 /* ======================
