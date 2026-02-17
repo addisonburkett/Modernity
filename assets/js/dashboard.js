@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     const sidebar = document.getElementById("sidebar");
     const pinBtn = document.getElementById("pinSidebar");
     const menuBtn = document.getElementById("menuBtn");
@@ -9,21 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const fileArea = document.getElementById("fileArea");
     const logoutBtn = document.getElementById("logoutBtn");
 
-    // Restore pinned state
+    /* Restore pinned state */
     if (localStorage.getItem("sidebarPinned") === "true") {
         sidebar.classList.add("pinned");
         pinBtn.classList.add("active");
     }
 
-    // Pin toggle
+    /* Sidebar Pin Toggle */
     pinBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         sidebar.classList.toggle("pinned");
         pinBtn.classList.toggle("active");
-        localStorage.setItem("sidebarPinned", sidebar.classList.contains("pinned"));
+
+        localStorage.setItem(
+            "sidebarPinned",
+            sidebar.classList.contains("pinned")
+        );
     });
 
-    // Menu dropdown
+    /* Menu Dropdown */
     menuBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         const open = menuDropdown.classList.toggle("open");
@@ -37,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         menuDropdown.setAttribute("aria-hidden", "true");
     });
 
-    // Expandable library nav
+    /* Expandable Library */
     document.querySelectorAll(".nav-expand").forEach(btn => {
         btn.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -45,13 +50,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Theme toggle
+    /* Theme Toggle */
     themeToggle.addEventListener("click", () => {
         const html = document.documentElement;
-        html.setAttribute("data-theme", html.getAttribute("data-theme") === "dark" ? "light" : "dark");
+        const current = html.getAttribute("data-theme");
+        html.setAttribute(
+            "data-theme",
+            current === "dark" ? "light" : "dark"
+        );
     });
 
-    // Grid/List toggle
+    /* Grid / List Toggle */
     gridBtn.addEventListener("click", () => {
         fileArea.classList.remove("list-view");
         fileArea.classList.add("grid-view");
@@ -70,10 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
         gridBtn.setAttribute("aria-pressed", "false");
     });
 
-    // Logout (placeholder)
+    /* Logout (placeholder) */
     if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
             console.log("Logout clicked");
         });
     }
+
 });

@@ -1,38 +1,7 @@
 /* ======================
-   THEME VARIABLES
-====================== */
-:root {
-    --bg: #0f0f1a;
-    --bg-light: #f5f7fa;
-    --fg: #e6e6f0;
-    --fg-light: #1a1a1a;
-    --accent: #8BE7FF;
-    --accent-strong: #baf2ff;
-}
-
-html[data-theme="light"] {
-    --bg: var(--bg-light);
-    --fg: var(--fg-light);
-}
-
-/* ======================
-   BODY & DASHBOARD
-====================== */
-body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--fg);
-}
-
-.dashboard {
-    display: flex;
-    height: 100vh;
-}
-
-/* ======================
    SIDEBAR
 ====================== */
+
 .sidebar {
     width: 80px;
     background: rgba(0,0,0,0.5);
@@ -40,23 +9,32 @@ body {
     border-right: 1px solid rgba(255,255,255,0.08);
     display: flex;
     flex-direction: column;
-    transition: width 0.3s ease;
+    transition: width 0.25s ease;
     overflow-x: hidden;
+    outline: 2px solid var(--accent);
 }
 
-/* Hover expand / pinned */
-.sidebar.pinned,
-.sidebar:hover {
+.sidebar:not(.pinned):hover {
     width: 260px;
 }
 
-/* Sidebar header */
+.sidebar.pinned {
+    width: 260px;
+}
+
+/* -------------------------
+   Sidebar Header
+------------------------- */
 .sidebar-header {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 18px 16px;
     gap: 12px;
+    transition: justify-content 0.25s ease;
+}
+
+.sidebar:not(.pinned):not(:hover) .sidebar-header {
+    justify-content: center;
 }
 
 .logo-link {
@@ -67,41 +45,39 @@ body {
     color: var(--fg);
 }
 
+.sidebar:not(.pinned):not(:hover) .logo-link {
+    gap: 0;
+}
+
 .logo-icon {
     width: 32px;
     height: 32px;
 }
 
-.logo-text {
-    font-weight: 600;
-    font-size: 16px;
-}
-
-/* Hide logo text when collapsed */
 .sidebar:not(.pinned):not(:hover) .logo-text {
     display: none;
 }
 
-/* ======================
-   NAVIGATION
-====================== */
+/* -------------------------
+   Sidebar Navigation
+------------------------- */
 .sidebar-nav {
     flex: 1;
     padding: 10px;
     overflow-y: auto;
 }
 
-/* Nav item & expand button */
 .nav-item,
 .nav-expand {
-    position: relative;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
     background: transparent;
     border: none;
     cursor: pointer;
-    border-radius: 12px;
-    margin-bottom: 4px;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.12s ease;
 }
 
 .nav-item:hover,
@@ -110,63 +86,33 @@ body {
     transform: translateY(-2px);
 }
 
-/* Inner wrapper for icon + label */
-.btn-content {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* center icons when collapsed */
-    gap: 12px;
-    padding: 12px 16px;
-    transition: all 0.3s ease;
-}
-
-/* Icon */
-.nav-item .icon,
-.nav-expand .icon {
-    width: 24px;
-    height: 24px;
-    display: block;
-}
-
-/* Label */
-.nav-item .label,
-.nav-expand .label {
-    white-space: nowrap;
-    opacity: 1;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* Collapsed: hide labels, center icons */
-.sidebar:not(.pinned):not(:hover) .btn-content {
+/* Center icons in collapsed state */
+.sidebar:not(.pinned):not(:hover) .nav-item,
+.sidebar:not(.pinned):not(:hover) .nav-expand {
     justify-content: center;
-    padding: 12px 0;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0;
 }
 
-.sidebar:not(.pinned):not(:hover) .label {
-    opacity: 0;
-    transform: translateX(-10px);
-    pointer-events: none;
-}
-
-/* Active */
+/* Active shading */
 .nav-item.active {
     background: rgba(139,231,255,0.12);
     color: var(--accent);
 }
 
-.nav-item.active::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 40%;
-    background: var(--accent);
-    border-radius: 2px;
+/* Collapsed active shading around icon only */
+.sidebar:not(.pinned):not(:hover) .nav-item.active {
+    padding-left: 0;
+    padding-right: 0;
 }
 
-/* Nav groups */
+/* Hide chevron in collapsed state */
+.sidebar:not(.pinned):not(:hover) .chevron {
+    display: none;
+}
+
+/* Nav group children */
 .nav-group .nav-children {
     display: none;
     margin-left: 12px;
@@ -181,9 +127,9 @@ body {
     transition: transform 0.28s ease;
 }
 
-/* ======================
-   FOOTER
-====================== */
+/* -------------------------
+   Sidebar Footer
+------------------------- */
 .sidebar-footer {
     margin-top: auto;
     padding: 12px 8px;
@@ -206,51 +152,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
-/* Hide extra footer buttons when collapsed */
-.sidebar:not(.pinned):not(:hover) #themeToggle,
-.sidebar:not(.pinned):not(:hover) #pinSidebar,
-.sidebar:not(.pinned):not(:hover) .pin-wrapper {
-    display: none;
-}
-
-/* ======================
-   TOOLTIP
-====================== */
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: max-content;
-    background-color: rgba(20,20,20,0.95);
-    color: #fff;
-    text-align: center;
-    padding: 6px 8px;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 10;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.18s ease, transform 0.18s ease;
-    white-space: nowrap;
-    font-size: 13px;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(-50%) translateY(-6px);
-}
-
-/* Collapsed sidebar: tooltips appear to the right */
-.sidebar:not(.pinned):not(:hover) .tooltiptext {
-    left: 100%;
-    bottom: 50%;
-    transform: translateX(12px) translateY(50%);
+.footer-icon {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
 }
