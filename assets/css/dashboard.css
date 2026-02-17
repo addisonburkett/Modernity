@@ -328,3 +328,26 @@ body {
 .list-view {
     grid-template-columns: 1fr;
 }
+
+/* Footer layout: logout left, theme pinned right */
+.sidebar-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Theme toggle pinned right */
+.theme-wrapper {
+    margin-left: auto;
+}
+
+/* Hide theme toggle when collapsed */
+.sidebar:not(.pinned):not(:hover) .theme-wrapper {
+    display: none !important;
+}
+
+.footer-btn .icon {
+    width: 20px;
+    height: 20px;
+}

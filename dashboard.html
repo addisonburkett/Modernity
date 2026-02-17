@@ -60,20 +60,24 @@
         </nav>
 
         <!-- FOOTER BUTTONS -->
+        <div class="sidebar-footer">
+
+            <!-- Logout (left side, always visible) -->
             <div class="tooltip">
-                <button class="icon-btn">
+                <button id="logoutBtn" class="icon-btn footer-btn">
                     <img src="assets/svg/logout.svg" class="icon">
                 </button>
                 <span class="tooltiptext">Log Out</span>
             </div>
 
-        <div class="sidebar-footer">
-            <div class="tooltip">
-                <button id="themeToggle" class="icon-btn">
+            <!-- Theme Toggle (right side, hidden when collapsed) -->
+            <div class="tooltip theme-wrapper">
+                <button id="themeToggle" class="icon-btn footer-btn">
                     <img src="assets/svg/moon.svg" class="icon">
                 </button>
                 <span class="tooltiptext">Toggle Theme</span>
             </div>
+
         </div>
 
     </aside>
