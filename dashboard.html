@@ -19,111 +19,118 @@
 
         <!-- SIDEBAR HEADER -->
         <div class="sidebar-header">
+            <!-- Logo + Text -->
             <a href="index.html" class="logo-link">
-                <img src="assets/svg/favicon.svg" class="logo-icon" alt="Modernity logo">
+                <img src="assets/svg/favicon.svg" class="logo-icon">
                 <span class="logo-text">Modernity</span>
             </a>
+
+            <!-- ONLY Pin Button -->
+            <div class="tooltip">
+                <button id="pinSidebar" class="icon-btn">
+                    <img src="assets/svg/pin.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Pin sidebar</span>
+            </div>
         </div>
 
         <!-- NAVIGATION -->
         <nav class="sidebar-nav">
             <button class="nav-item active">
-                <img src="assets/svg/home.svg" class="icon" alt="Home">
+                <img src="assets/svg/home.svg" class="icon">
                 <span class="label">Home</span>
             </button>
 
             <div class="nav-group">
                 <button class="nav-expand">
-                    <img src="assets/svg/chevron.svg" class="icon chevron" alt="Expand">
+                    <img src="assets/svg/chevron.svg" class="icon chevron">
                     <span class="label">Library</span>
                 </button>
                 <div class="nav-children">
                     <button class="nav-item">
-                        <img src="assets/svg/documents.svg" class="icon" alt="Documents">
+                        <img src="assets/svg/documents.svg" class="icon">
                         <span class="label">Documents</span>
                     </button>
                     <button class="nav-item">
-                        <img src="assets/svg/pictures.svg" class="icon" alt="Pictures">
+                        <img src="assets/svg/pictures.svg" class="icon">
                         <span class="label">Pictures</span>
                     </button>
                 </div>
             </div>
         </nav>
 
-        <!-- FOOTER -->
+        <!-- FOOTER BUTTONS -->
         <div class="sidebar-footer">
-            <div class="footer-controls">
+            <div class="tooltip">
+                <button id="themeToggle" class="icon-btn">
+                    <img src="assets/svg/moon.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Toggle Theme</span>
+            </div>
 
-                <div class="tooltip">
-                    <button id="logoutBtn" class="icon-btn footer-btn">
-                        <img src="assets/svg/logout.svg" class="icon footer-icon">
-                    </button>
-                    <span class="tooltiptext">Log Out</span>
-                </div>
-
-                <div class="tooltip">
-                    <button id="themeToggle" class="icon-btn footer-btn">
-                        <img src="assets/svg/moon.svg" class="icon footer-icon">
-                    </button>
-                    <span class="tooltiptext">Toggle Theme</span>
-                </div>
-
-                <div class="tooltip pin-wrapper">
-                    <button id="pinSidebar" class="icon-btn footer-btn">
-                        <img src="assets/svg/pin.svg" class="icon footer-icon">
-                    </button>
-                    <span class="tooltiptext">Pin Sidebar</span>
-                </div>
-
+            <div class="tooltip">
+                <button class="icon-btn">
+                    <img src="assets/svg/logout.svg" class="icon">
+                </button>
+                <span class="tooltiptext">Log Out</span>
             </div>
         </div>
 
     </aside>
 
+
+
+
     <!-- MAIN -->
     <main class="main">
 
         <!-- TOPBAR -->
-        <div class="topbar">
+<div class="topbar">
 
-            <div class="topbar-left">
+    <!-- LEFT SIDE -->
+    <div class="topbar-left">
 
-                <div class="menu-wrapper">
-                    <button id="menuBtn" class="icon-btn" aria-haspopup="true" aria-expanded="false">
-                        <img src="assets/svg/menu.svg" class="icon" alt="Menu">
-                    </button>
+        <!-- MENU DROPDOWN -->
+        <div class="menu-wrapper">
+            <button id="menuBtn" class="icon-btn">
+                <img src="assets/svg/menu.svg" class="icon">
+            </button>
 
-                    <div class="menu-dropdown" id="menuDropdown" role="menu" aria-hidden="true">
-                        <button class="dropdown-item">New Folder</button>
-                        <button class="dropdown-item">Upload File</button>
-                        <button class="dropdown-item">Settings</button>
-                        <button class="dropdown-item">Help</button>
-                    </div>
-                </div>
-
-                <div class="breadcrumbs">
-                    Dashboard / Home
-                </div>
-
+            <div class="menu-dropdown" id="menuDropdown">
+                <button class="dropdown-item">New Folder</button>
+                <button class="dropdown-item">Upload File</button>
+                <button class="dropdown-item">Settings</button>
+                <button class="dropdown-item">Help</button>
             </div>
+        </div>
 
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            Dashboard / Home
+        </div>
+
+    </div>
+
+
+            <!-- View toggle -->
             <div class="view-toggle">
                 <div class="tooltip">
-                    <button id="gridView" class="toggle-btn active" aria-pressed="true">
-                        <img src="assets/svg/grid.svg" class="icon" alt="Grid view">
+                    <button id="gridView" class="toggle-btn active">
+                        <img src="assets/svg/grid.svg" class="icon">
                     </button>
                     <span class="tooltiptext">Grid view</span>
                 </div>
 
                 <div class="tooltip">
-                    <button id="listView" class="toggle-btn" aria-pressed="false">
-                        <img src="assets/svg/list.svg" class="icon" alt="List view">
+                    <button id="listView" class="toggle-btn">
+                        <img src="assets/svg/list.svg" class="icon">
                     </button>
                     <span class="tooltiptext">List view</span>
                 </div>
             </div>
         </div>
 
+        <!-- FILE AREA -->
         <div id="fileArea" class="file-area grid-view"></div>
 
     </main>

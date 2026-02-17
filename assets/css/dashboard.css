@@ -1,4 +1,37 @@
 /* ======================
+   THEME VARIABLES
+====================== */
+
+:root {
+    --bg: #0f0f1a;
+    --bg-light: #f5f7fa;
+    --fg: #e6e6f0;
+    --fg-light: #1a1a1a;
+    --accent: #8BE7FF;
+}
+
+html[data-theme="light"] {
+    --bg: var(--bg-light);
+    --fg: var(--fg-light);
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+}
+
+/* ======================
+   LAYOUT
+====================== */
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+/* ======================
    SIDEBAR
 ====================== */
 
@@ -10,31 +43,33 @@
     display: flex;
     flex-direction: column;
     transition: width 0.25s ease;
-    overflow-x: hidden;
-    outline: 2px solid var(--accent);
+    overflow: hidden;
 }
 
+/* Hover expand */
 .sidebar:not(.pinned):hover {
     width: 260px;
 }
 
+/* Pinned open */
 .sidebar.pinned {
     width: 260px;
 }
 
-/* -------------------------
-   Sidebar Header
-------------------------- */
-.sidebar-header {
-    display: flex;
-    align-items: center;
-    padding: 18px 16px;
-    gap: 12px;
-    transition: justify-content 0.25s ease;
+/* Hide labels when collapsed */
+.sidebar:not(.pinned):not(:hover) .label,
+.sidebar:not(.pinned):not(:hover) .logo-text {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.sidebar:not(.pinned):not(:hover) .sidebar-header {
-    justify-content: center;
+/* Header */
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
 }
 
 .logo-link {
@@ -45,119 +80,249 @@
     color: var(--fg);
 }
 
-.sidebar:not(.pinned):not(:hover) .logo-link {
-    gap: 0;
-}
-
 .logo-icon {
     width: 32px;
-    height: 32px;
 }
 
-.sidebar:not(.pinned):not(:hover) .logo-text {
-    display: none;
+.header-buttons {
+    display: flex;
+    gap: 8px; /* space between pin & collapse buttons */
 }
 
-/* -------------------------
-   Sidebar Navigation
-------------------------- */
+/* Navigation */
+
 .sidebar-nav {
     flex: 1;
     padding: 10px;
-    overflow-y: auto;
 }
 
 .nav-item,
 .nav-expand {
+    position: relative;
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     padding: 12px 16px;
-    border-radius: 12px;
-    background: transparent;
     border: none;
+    background: transparent;
+    color: var(--fg);
+    border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.12s ease;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
+/* Hover */
 .nav-item:hover,
 .nav-expand:hover {
-    background: rgba(139,231,255,0.06);
-    transform: translateY(-2px);
+    background: rgba(139,231,255,0.1);
 }
 
-/* Center icons in collapsed state */
-.sidebar:not(.pinned):not(:hover) .nav-item,
-.sidebar:not(.pinned):not(:hover) .nav-expand {
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-    gap: 0;
-}
-
-/* Active shading */
+/* Active (clean, no glow) */
 .nav-item.active {
     background: rgba(139,231,255,0.12);
     color: var(--accent);
 }
 
-/* Collapsed active shading around icon only */
-.sidebar:not(.pinned):not(:hover) .nav-item.active {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* Hide chevron in collapsed state */
-.sidebar:not(.pinned):not(:hover) .chevron {
-    display: none;
+.nav-item.active::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    width: 4px;
+    height: 60%;
+    border-radius: 4px;
+    background: var(--accent);
 }
 
 /* Nav group children */
+
 .nav-group .nav-children {
     display: none;
-    margin-left: 12px;
-    margin-top: 6px;
+    margin-left: 15px;
 }
 
 .nav-group.open .nav-children {
     display: block;
 }
 
+/* Chevron rotate */
+
 .chevron {
-    transition: transform 0.28s ease;
+    transition: transform 0.3s ease;
 }
 
-/* -------------------------
-   Sidebar Footer
-------------------------- */
+.nav-group.open .chevron {
+    transform: rotate(90deg);
+}
+
+/* Footer */
+
 .sidebar-footer {
-    margin-top: auto;
-    padding: 12px 8px;
+    padding: 20px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
-.footer-controls {
+/* Buttons */
+
+.icon-btn,
+.toggle-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.icon-btn:hover,
+.toggle-btn:hover {
+    background: rgba(139,231,255,0.12);
+}
+
+.toggle-btn.active {
+    background: rgba(139,231,255,0.15);
+    border-color: var(--accent);
+}
+
+/* ======================
+   PIN ACTIVE STATE
+====================== */
+
+#pinSidebar {
+    transition: transform 0.25s ease;
+}
+
+#pinSidebar.active {
+    transform: rotate(45deg);
+}
+
+
+/* ======================
+   ICONS
+====================== */
+
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* ======================
+   MAIN / TOPBAR
+====================== */
+
+.main {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    gap: 12px;
 }
 
-.footer-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+.topbar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0;
+    justify-content: space-between;
+    padding: 20px 40px;
 }
 
-.footer-icon {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-    padding: 0;
+.search-container {
+    position: relative;
+}
+
+.search-container input {
+    padding: 8px 12px 8px 34px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: var(--fg);
+    outline: none;
+}
+
+.search-container input:focus {
+    border-color: var(--accent);
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+}
+
+/* View toggle layout */
+
+.view-toggle {
+    display: flex;
+    gap: 10px;
+}
+
+/* ======================
+   TOPBAR LEFT
+====================== */
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ======================
+   MENU DROPDOWN
+====================== */
+
+.menu-wrapper {
+    position: relative;
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.menu-dropdown.open {
+    display: flex;
+}
+
+.dropdown-item {
+    background: transparent;
+    border: none;
+    color: var(--fg);
+    padding: 10px 12px;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(139,231,255,0.12);
+}
+
+
+/* ======================
+   FILE AREA
+====================== */
+
+.file-area {
+    padding: 30px 40px;
+    display: grid;
+    gap: 20px;
+}
+
+.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+}
+
+.list-view {
+    grid-template-columns: 1fr;
 }

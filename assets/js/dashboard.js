@@ -8,7 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const gridBtn = document.getElementById("gridView");
     const listBtn = document.getElementById("listView");
     const fileArea = document.getElementById("fileArea");
-    const logoutBtn = document.getElementById("logoutBtn");
+
+    /* ======================
+       Sidebar Pin Toggle
+    ====================== */
+
+    pinBtn.onclick = () => {
+        sidebar.classList.toggle("pinned");
+        pinBtn.classList.toggle("active");
+    };
 
     /* Restore pinned state */
     if (localStorage.getItem("sidebarPinned") === "true") {
@@ -16,9 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         pinBtn.classList.add("active");
     }
 
-    /* Sidebar Pin Toggle */
-    pinBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+    pinBtn.onclick = () => {
         sidebar.classList.toggle("pinned");
         pinBtn.classList.toggle("active");
 
@@ -26,64 +32,62 @@ document.addEventListener("DOMContentLoaded", () => {
             "sidebarPinned",
             sidebar.classList.contains("pinned")
         );
-    });
+    };
 
-    /* Menu Dropdown */
-    menuBtn.addEventListener("click", (e) => {
+
+
+    /* ======================
+       Menu Dropdown
+    ====================== */
+
+    menuBtn.onclick = (e) => {
         e.stopPropagation();
-        const open = menuDropdown.classList.toggle("open");
-        menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
-        menuDropdown.setAttribute("aria-hidden", open ? "false" : "true");
-    });
+        menuDropdown.classList.toggle("open");
+    };
 
     document.addEventListener("click", () => {
         menuDropdown.classList.remove("open");
-        menuBtn.setAttribute("aria-expanded", "false");
-        menuDropdown.setAttribute("aria-hidden", "true");
     });
 
-    /* Expandable Library */
+    /* ======================
+       Expandable Library
+    ====================== */
+
     document.querySelectorAll(".nav-expand").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            e.stopPropagation();
+        btn.onclick = () => {
             btn.parentElement.classList.toggle("open");
-        });
+        };
     });
 
-    /* Theme Toggle */
-    themeToggle.addEventListener("click", () => {
+    /* ======================
+       Theme Toggle
+    ====================== */
+
+    themeToggle.onclick = () => {
         const html = document.documentElement;
         const current = html.getAttribute("data-theme");
         html.setAttribute(
             "data-theme",
             current === "dark" ? "light" : "dark"
         );
-    });
+    };
 
-    /* Grid / List Toggle */
-    gridBtn.addEventListener("click", () => {
+    /* ======================
+       Grid / List Toggle
+    ====================== */
+
+    gridBtn.onclick = () => {
         fileArea.classList.remove("list-view");
         fileArea.classList.add("grid-view");
         gridBtn.classList.add("active");
         listBtn.classList.remove("active");
-        gridBtn.setAttribute("aria-pressed", "true");
-        listBtn.setAttribute("aria-pressed", "false");
-    });
+    };
 
-    listBtn.addEventListener("click", () => {
+    listBtn.onclick = () => {
         fileArea.classList.remove("grid-view");
         fileArea.classList.add("list-view");
         listBtn.classList.add("active");
         gridBtn.classList.remove("active");
-        listBtn.setAttribute("aria-pressed", "true");
-        gridBtn.setAttribute("aria-pressed", "false");
-    });
-
-    /* Logout (placeholder) */
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            console.log("Logout clicked");
-        });
-    }
+    };
 
 });
