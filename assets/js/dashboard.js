@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     /* ======================
-       Menu Dropdown
+       Menu Dropdown (safe)
     ====================== */
     const menuDropdown = document.getElementById("menuDropdown");
-    if (menuDropdown) {
+    if (menuDropdown && menuBtn) {
         menuBtn.onclick = (e) => {
             e.stopPropagation();
             menuDropdown.classList.toggle("open");
@@ -45,30 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ======================
        Theme Toggle
     ====================== */
-    themeToggle.onclick = () => {
-        const html = document.documentElement;
-        const current = html.getAttribute("data-theme");
-        html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
-    };
+    if (themeToggle) {
+        themeToggle.onclick = () => {
+            const html = document.documentElement;
+            const current = html.getAttribute("data-theme");
+            html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+        };
+    }
 
     /* ======================
        Grid/List Toggle
     ====================== */
     let isGrid = true;
-    viewToggle.onclick = () => {
-        isGrid = !isGrid;
-        if (isGrid) {
-            fileArea.classList.remove("list-view");
-            fileArea.classList.add("grid-view");
-            viewIcon.src = "assets/svg/grid.svg";
-            viewTooltip.textContent = "Grid view";
-        } else {
-            fileArea.classList.remove("grid-view");
-            fileArea.classList.add("list-view");
-            viewIcon.src = "assets/svg/list.svg";
-            viewTooltip.textContent = "List view";
-        }
-    };
+    if (viewToggle && fileArea && viewIcon && viewTooltip) {
+        viewToggle.onclick = () => {
+            isGrid = !isGrid;
+            if (isGrid) {
+                fileArea.classList.remove("list-view");
+                fileArea.classList.add("grid-view");
+                viewIcon.src = "assets/svg/grid.svg";
+                viewTooltip.textContent = "Grid view";
+            } else {
+                fileArea.classList.remove("grid-view");
+                fileArea.classList.add("list-view");
+                viewIcon.src = "assets/svg/list.svg";
+                viewTooltip.textContent = "List view";
+            }
+        };
+    }
 
     /* ======================
        Smart Tooltips
@@ -93,64 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         wrapper.addEventListener("mouseleave", () => {
             tooltip.classList.remove("show");
-        });
-    });
-
-    /* ======================
-       FIREBASE UPLOAD + GALLERY
-    ====================== */
-
-    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js").then(authModule => {
-        import("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js").then(storageModule => {
-
-            const { getAuth } = authModule;
-            const { getStorage, ref, uploadBytesResumable, getDownloadURL, listAll } = storageModule;
-
-            const auth = getAuth();
-            const storage = getStorage();
-
-            const uploadBtn = document.getElementById("uploadBtn");
-            const fileInput = document.getElementById("fileInput");
-
-            uploadBtn.onclick = () => fileInput.click();
-
-            fileInput.onchange = async (e) => {
-                const files = e.target.files;
-                const user = auth.currentUser;
-                if (!user) return;
-
-                for (const file of files) {
-                    const storageRef = ref(storage, `users/${user.uid}/uploads/${file.name}`);
-                    const task = uploadBytesResumable(storageRef, file);
-
-                    task.on("state_changed", null, console.error, async () => {
-                        await loadFiles();
-                    });
-                }
-            };
-
-            async function loadFiles() {
-                const user = auth.currentUser;
-                if (!user) return;
-
-                const folder = ref(storage, `users/${user.uid}/uploads/`);
-                const result = await listAll(folder);
-
-                fileArea.innerHTML = "";
-
-                for (const item of result.items) {
-                    const url = await getDownloadURL(item);
-                    const div = document.createElement("div");
-                    div.className = "file-card";
-                    div.innerHTML = `<img src="${url}" class="file-thumb">`;
-                    fileArea.appendChild(div);
-                }
-            }
-
-            auth.onAuthStateChanged(user => {
-                if (user) loadFiles();
-            });
-
         });
     });
 

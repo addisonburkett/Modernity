@@ -111,25 +111,27 @@
             </div>
         </div>
 
-        <!-- Upload button -->
-        <div style="padding: 0 40px;">
-            <button id="uploadBtn" class="btn-primary">Upload Files</button>
-            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        <!-- Upload controls -->
+        <div style="padding: 0 40px 10px;">
+            <button id="uploadBtn" class="btn-primary">Upload files</button>
+            <input type="file" id="fileInput" accept="image/*,application/pdf,video/*" multiple hidden>
         </div>
 
+        <!-- File area -->
         <div id="fileArea" class="file-area grid-view"></div>
 
     </main>
 
 </div>
 
-<!-- FIREBASE AUTH + STORAGE -->
+<!-- FIREBASE AUTH + STORAGE + GALLERY -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } 
         from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getStorage } 
-        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+    import { 
+        getStorage, ref, uploadBytesResumable, getDownloadURL, listAll 
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCqsdbfhl-svsh2eZBxoZeA3SvPEjg8rZE",
@@ -144,13 +146,105 @@
     const auth = getAuth(app);
     const storage = getStorage(app);
 
-    // Redirect if not logged in
+    const logoutBtn = document.getElementById("logoutBtn");
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
+    const fileArea = document.getElementById("fileArea");
+    const searchInput = document.getElementById("searchInput");
+
+    let currentFiles = []; // for simple search/filter
+
     onAuthStateChanged(auth, user => {
-        if (!user) window.location.href = "login.html";
+        if (!user) {
+            window.location.href = "login.html";
+        } else {
+            loadFiles(user);
+        }
     });
 
-    // Logout
-    document.getElementById("logoutBtn").onclick = () => signOut(auth);
+    if (logoutBtn) {
+        logoutBtn.onclick = () => signOut(auth);
+    }
+
+    if (uploadBtn && fileInput) {
+        uploadBtn.onclick = () => fileInput.click();
+
+        fileInput.onchange = async (e) => {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const files = Array.from(e.target.files || []);
+            for (const file of files) {
+                const path = `users/${user.uid}/uploads/${Date.now()}-${file.name}`;
+                const storageRef = ref(storage, path);
+                const task = uploadBytesResumable(storageRef, file);
+
+                task.on("state_changed", null, console.error, async () => {
+                    await loadFiles(user);
+                });
+            }
+        };
+    }
+
+    async function loadFiles(user) {
+        const folderRef = ref(storage, `users/${user.uid}/uploads/`);
+        const result = await listAll(folderRef);
+
+        currentFiles = [];
+
+        fileArea.innerHTML = "";
+
+        for (const item of result.items) {
+            const url = await getDownloadURL(item);
+            const name = item.name;
+
+            const fileObj = { name, url };
+            currentFiles.push(fileObj);
+
+            const card = document.createElement("div");
+            card.className = "file-card";
+
+            const isImage = /\.(jpe?g|png|gif|webp|heic|heif)$/i.test(name);
+
+            card.innerHTML = `
+                <div class="file-thumb-wrapper">
+                    ${isImage ? `<img src="${url}" class="file-thumb">`
+                              : `<div class="file-thumb file-thumb-generic">${name.split('.').pop() || ''}</div>`}
+                </div>
+                <div class="file-meta">
+                    <div class="file-name">${name}</div>
+                </div>
+            `;
+
+            fileArea.appendChild(card);
+        }
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener("input", () => {
+            const q = searchInput.value.toLowerCase();
+            fileArea.innerHTML = "";
+            for (const f of currentFiles) {
+                if (!f.name.toLowerCase().includes(q)) continue;
+
+                const card = document.createElement("div");
+                card.className = "file-card";
+
+                const isImage = /\.(jpe?g|png|gif|webp|heic|heif)$/i.test(f.name);
+
+                card.innerHTML = `
+                    <div class="file-thumb-wrapper">
+                        ${isImage ? `<img src="${f.url}" class="file-thumb">`
+                                  : `<div class="file-thumb file-thumb-generic">${f.name.split('.').pop() || ''}</div>`}
+                    </div>
+                    <div class="file-meta">
+                        <div class="file-name">${f.name}</div>
+                    </div>
+                `;
+                fileArea.appendChild(card);
+            }
+        });
+    }
 </script>
 
 </body>
