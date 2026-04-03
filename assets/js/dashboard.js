@@ -27,11 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
        Menu Dropdown
     ====================== */
     const menuDropdown = document.getElementById("menuDropdown");
-    menuBtn.onclick = (e) => {
-        e.stopPropagation();
-        menuDropdown.classList.toggle("open");
-    };
-    document.addEventListener("click", () => menuDropdown.classList.remove("open"));
+    if (menuDropdown) {
+        menuBtn.onclick = (e) => {
+            e.stopPropagation();
+            menuDropdown.classList.toggle("open");
+        };
+        document.addEventListener("click", () => menuDropdown.classList.remove("open"));
+    }
 
     /* ======================
        Expandable Library
@@ -50,9 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     /* ======================
-       Single Grid/List Toggle
+       Grid/List Toggle
     ====================== */
-    let isGrid = true; // default
+    let isGrid = true;
     viewToggle.onclick = () => {
         isGrid = !isGrid;
         if (isGrid) {
@@ -91,6 +93,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
         wrapper.addEventListener("mouseleave", () => {
             tooltip.classList.remove("show");
+        });
+    });
+
+    /* ======================
+       FIREBASE UPLOAD + GALLERY
+    ====================== */
+
+    import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js").then(authModule => {
+        import("https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js").then(storageModule => {
+
+            const { getAuth } = authModule;
+            const { getStorage, ref, uploadBytesResumable, getDownloadURL, listAll } = storageModule;
+
+            const auth = getAuth();
+            const storage = getStorage();
+
+            const uploadBtn = document.getElementById("uploadBtn");
+            const fileInput = document.getElementById("fileInput");
+
+            uploadBtn.onclick = () => fileInput.click();
+
+            fileInput.onchange = async (e) => {
+                const files = e.target.files;
+                const user = auth.currentUser;
+                if (!user) return;
+
+                for (const file of files) {
+                    const storageRef = ref(storage, `users/${user.uid}/uploads/${file.name}`);
+                    const task = uploadBytesResumable(storageRef, file);
+
+                    task.on("state_changed", null, console.error, async () => {
+                        await loadFiles();
+                    });
+                }
+            };
+
+            async function loadFiles() {
+                const user = auth.currentUser;
+                if (!user) return;
+
+                const folder = ref(storage, `users/${user.uid}/uploads/`);
+                const result = await listAll(folder);
+
+                fileArea.innerHTML = "";
+
+                for (const item of result.items) {
+                    const url = await getDownloadURL(item);
+                    const div = document.createElement("div");
+                    div.className = "file-card";
+                    div.innerHTML = `<img src="${url}" class="file-thumb">`;
+                    fileArea.appendChild(div);
+                }
+            }
+
+            auth.onAuthStateChanged(user => {
+                if (user) loadFiles();
+            });
+
         });
     });
 

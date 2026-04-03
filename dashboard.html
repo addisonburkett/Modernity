@@ -17,7 +17,6 @@
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
 
-        <!-- SIDEBAR HEADER -->
         <div class="sidebar-header">
             <a href="index.html" class="logo-link">
                 <img src="assets/svg/favicon.svg" class="logo-icon">
@@ -32,7 +31,6 @@
             </div>
         </div>
 
-        <!-- NAVIGATION -->
         <nav class="sidebar-nav">
             <button class="nav-item active">
                 <img src="assets/svg/home.svg" class="icon">
@@ -57,9 +55,7 @@
             </div>
         </nav>
 
-        <!-- FOOTER BUTTONS -->
         <div class="sidebar-footer">
-
             <div class="tooltip">
                 <button id="logoutBtn" class="icon-btn footer-btn">
                     <img src="assets/svg/logout.svg" class="icon">
@@ -73,7 +69,6 @@
                 </button>
                 <span class="tooltiptext">Toggle Theme</span>
             </div>
-
         </div>
 
     </aside>
@@ -81,12 +76,8 @@
     <!-- MAIN -->
     <main class="main">
 
-        <!-- TOPBAR -->
         <div class="topbar">
-
-            <!-- LEFT SIDE -->
             <div class="topbar-left">
-                <!-- Menu button -->
                 <div class="tooltip">
                     <button id="menuBtn" class="icon-btn">
                         <img src="assets/svg/menu.svg" class="icon">
@@ -99,14 +90,11 @@
                 </div>
             </div>
 
-            <!-- CENTER SEARCH -->
             <div class="topbar-search">
                 <input type="text" id="searchInput" placeholder="Search files..." />
             </div>
 
-            <!-- RIGHT SIDE -->
             <div class="topbar-right">
-                <!-- Single Grid/List toggle button -->
                 <div class="tooltip">
                     <button id="viewToggle" class="icon-btn">
                         <img id="viewIcon" src="assets/svg/grid.svg" class="icon">
@@ -114,7 +102,6 @@
                     <span id="viewTooltip" class="tooltiptext">Grid view</span>
                 </div>
 
-                <!-- Profile button placeholder -->
                 <div class="tooltip">
                     <button id="profileBtn" class="icon-btn">
                         <img src="assets/svg/profile.svg" class="icon">
@@ -122,15 +109,49 @@
                     <span class="tooltiptext">Profile</span>
                 </div>
             </div>
-
         </div>
 
-        <!-- FILE AREA -->
+        <!-- Upload button -->
+        <div style="padding: 0 40px;">
+            <button id="uploadBtn" class="btn-primary">Upload Files</button>
+            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+        </div>
+
         <div id="fileArea" class="file-area grid-view"></div>
 
     </main>
 
 </div>
+
+<!-- FIREBASE AUTH + STORAGE -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } 
+        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getStorage } 
+        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCqsdbfhl-svsh2eZBxoZeA3SvPEjg8rZE",
+        authDomain: "modernity-8752c.firebaseapp.com",
+        projectId: "modernity-8752c",
+        storageBucket: "modernity-8752c.appspot.com",
+        messagingSenderId: "1073090189021",
+        appId: "1:1073090189021:web:11a323f8ecf9b058882d34"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const storage = getStorage(app);
+
+    // Redirect if not logged in
+    onAuthStateChanged(auth, user => {
+        if (!user) window.location.href = "login.html";
+    });
+
+    // Logout
+    document.getElementById("logoutBtn").onclick = () => signOut(auth);
+</script>
 
 </body>
 </html>

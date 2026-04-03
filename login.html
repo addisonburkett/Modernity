@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login  |  Modernity</title>
+    <title>Login | Modernity</title>
+
     <link rel="icon" type="image/svg+xml" href="assets/svg/favicon.svg">
     <link rel="stylesheet" href="assets/css/main.css">
-    <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
@@ -22,7 +22,6 @@
             <a href="index.html">Home</a>
             <a href="login.html" class="active">Login</a>
             <a href="about.html">About</a>
-
         </nav>
     </div>
 </header>
@@ -32,27 +31,10 @@
         <h1>Welcome Back</h1>
         <p class="auth-subtitle">Sign in to continue to Modernity</p>
 
-        <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <div class="form-options">
-                <label>
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-                <a href="#">Forgot password?</a>
-            </div>
-
-            <button type="submit" class="btn-primary">Login</button>
-        </form>
+        <!-- GOOGLE LOGIN BUTTON -->
+        <button id="googleLogin" class="btn-primary" style="width:100%; margin-top:20px;">
+            Sign in with Google
+        </button>
 
         <p class="auth-footer">
             Don’t have an account?
@@ -64,6 +46,36 @@
 <footer>
     Modernity © 2026 — Crafted with intention
 </footer>
+
+<!-- FIREBASE + LOGIN LOGIC -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } 
+        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "YOUR_KEY",
+        authDomain: "modernity-8752c.firebaseapp.com",
+        projectId: "modernity-8752c",
+        storageBucket: "modernity-8752c.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    document.getElementById("googleLogin").onclick = async () => {
+        try {
+            await signInWithPopup(auth, provider);
+            window.location.href = "dashboard.html";
+        } catch (err) {
+            console.error(err);
+            alert("Login failed");
+        }
+    };
+</script>
 
 </body>
 </html>
